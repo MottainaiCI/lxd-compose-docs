@@ -1,0 +1,177 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "LXD Compose"
+theme = "timer-hugo"
+enableRobotsTXT = true
+
+
+# Navbar Menus
+[[menu.main]]
+name    = "Home"
+url     = "/"
+weight  = 1
+[[menu.main]]
+name    = "Documentation"
+url     = "docs"
+weight  = 2
+[[menu.main]]
+name    = "Contact"
+url     = "https://github.com/MottainaiCI/lxd-compose/issues"
+weight  = 5
+#[[menu.main]]
+#name    = "Blog"
+#url     = "blog"
+#weight  = 4
+
+# Site Params
+[params.banner]
+enable  = true
+#bgImage = "images/slider.jpg"
+bgImage = "images/back.jpg"
+heading = "HI, MY NAME IS LXD-COMPOSE & I AM A"
+description = "I'M BORN IN THE JUNE 14, 2020 FROM THE IDEA OF DANIELE RONDINA AKA geaaru."
+# button
+btn     = true
+btnText = "Getting Started"
+btnURL  = "docs/getting-started/"
+
+# flip text
+[[params.banner.flipText]]
+title   = "CONFIGURATOR"
+[[params.banner.flipText]]
+title   = "LXD CONTAINER ORCHESTRATOR"
+[[params.banner.flipText]]
+title   = "DEVELOPERS'S FRIEND"
+
+# Homepage About Section
+[params.about]
+enable  = true
+title   = "ABOUT ME"
+content = "Hello, I’m an Opensource tool that help people to deploy a complex environment over LXD, trace all configuration steps and to supply a way to update containers is a very fast way. I hold a master degree of LXD Technologies from the Opensource University. <br> <br> I can configure LXD container over Raspberry PI devices like everything supply an LXD API interface. <br> <br> I follow the philosophy where it's better to automate everything and to avoid repetitive manual work in everything I do."
+image   = "images/about/about.png"
+
+# Call to Action
+[params.cta]
+enable  = true
+title   = "SO WHAT YOU THINK ?"
+content = "Do you think that I could integrate some more features?"
+btnText = "Contact with me"
+btnURL     = "https://github.com/MottainaiCI/lxd-compose/issues"
+
+[[params.socialIcon]]
+icon = "ion-social-github"
+url = "https://github.com/MottainaiCI/lxd-compose"
+
+
+[[params.socialIcon]]
+icon = "ion-social-linkedin"
+url = "https://it.linkedin.com/in/danielerondina"
+
+# Configuration of the Book theme
+# Book configuration
+disablePathToLower = true
+enableGitInfo = true
+
+
+# Needed for mermaid/katex shortcodes
+[markup]
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 1
+
+# Multi-lingual mode config
+# There are different options to translate files
+# See https://gohugo.io/content-management/multilingual/#translation-by-filename
+# And https://gohugo.io/content-management/multilingual/#translation-by-content-directory
+[languages]
+[languages.en]
+  languageName = 'English'
+  contentDir = 'content'
+  weight = 1
+
+[menu]
+# [[menu.before]]
+[[menu.after]]
+  name = "Github"
+  url = "https://github.com/MottainaiCI/lxd-compose"
+  weight = 10
+
+
+[params]
+  home = "Home"
+  logo = "images/logo.png"
+  title = "LXD Compose"
+  dateFormat = "6 January 2006"
+# Meta data
+  description = "LXD Compose"
+  author = "Geaaru"
+# Google Analitycs
+  googleAnalitycsID = "Your ID"
+# contact form action
+  contactFormAction = "#" # contact form works with https://formspree.io
+  copyright = "Daniele Rondina"
+
+
+  # (Optional, default light) Sets color theme: light, dark or auto.
+  # Theme 'auto' switches between dark and light modes based on browser/os preferences
+  BookTheme = 'light'
+
+  # (Optional, default true) Controls table of contents visibility on right side of pages.
+  # Start and end levels can be controlled with markup.tableOfContents setting.
+  # You can also specify this parameter per page in front matter.
+  BookToC = false
+
+  # (Optional, default none) Set the path to a logo for the book. If the logo is
+  # /static/logo.png then the path would be logo.png
+  # BookLogo = 'logo.png'
+
+  # (Optional, default none) Set leaf bundle to render as side menu
+  # When not specified file structure and weights will be used
+  BookMenuBundle = '/menu'
+
+  # (Optional, default docs) Specify root page to render child pages as menu.
+  # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
+  # For backward compatibility you can set '*' to render all sections to menu. Acts same as '/'
+  BookSection = 'docs'
+
+  # Set source repository location.
+  # Used for 'Last Modified' and 'Edit this page' links.
+  BookRepo = 'https://github.com/MottainaiCI/lxd-compose-docs'
+
+  # Enable "Edit this page" links for 'doc' page type.
+  # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
+  # Edit path must point to root directory of repo.
+  BookEditPath = 'edit/master/site'
+
+  # Configure the date format used on the pages
+  # - In git information
+  # - In blog posts
+  BookDateFormat = 'January 2, 2006'
+
+  # (Optional, default true) Enables search function with flexsearch,
+  # Index is built on fly, therefore it might slowdown your website.
+  # Configuration for indexing can be adjusted in i18n folder per language.
+  BookSearch = true
+
+  # (Optional, default true) Enables comments template on pages
+  # By default partals/docs/comments.html includes Disqus template
+  # See https://gohugo.io/content-management/comments/#configure-disqus
+  # Can be overwritten by same param in page frontmatter
+  BookComments = true
+
+  # /!\ This is an experimental feature, might be removed or changed at any time
+  # (Optional, experimental, default false) Enables portable links and link checks in markdown pages.
+  # Portable links meant to work with text editors and let you write markdown without {{< relref >}} shortcode
+  # Theme will print warning if page referenced in markdown does not exists.
+  BookPortableLinks = true
+
+  # /!\ This is an experimental feature, might be removed or changed at any time
+  # (Optional, experimental, default false) Enables service worker that caches visited pages and resources for offline use.
+  BookServiceWorker = true
+
+  # /!\ This is an experimental feature, might be removed or changed at any time
+  # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
+  BookTranslatedOnly = false
+

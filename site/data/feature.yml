@@ -1,0 +1,37 @@
+enable  : true
+title   : Offer From Me
+#subtitle: >
+#  
+#  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, <br> quasi dolores numquam dolor vero ex, tempora commodi repellendus quod laborum.
+item    :
+  - icon  : ion-ios-barcode-outline
+    title : Simple Installation
+    description : >
+      With the Luet tool is very fast and easy install me in every Linux OS.
+
+  - icon  : ion-ios-americanfootball-outline
+    title : Free updates
+    description : >
+      Yeah, I'm free and available through Mocaccino OS repository.
+
+  - icon  : ion-ios-keypad-outline
+    title : No dependencies
+    description : >
+      I haven't dependencies on other tools. Just install me and enjoy.
+
+  - icon  : ion-loop
+    title : Automate everything
+    description : >
+      I use the Helm engine to describe repetitive tasks or
+      dynamic configurations.
+
+  - icon  : ion-ios-speedometer
+    title : Speedup deploy of your Services
+    description : >
+      Speedup installation of your services in a reproducible way.
+
+  - icon  : ion-android-settings
+    title : Infrastructure less
+    description : >
+      I don't need a database or a platform to deploy containers.
+      Just a node where to apply my projects that reach LXD instances.
