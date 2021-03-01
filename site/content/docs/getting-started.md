@@ -31,7 +31,7 @@ $> sudo luet upgrade
 
 ## Create environment tree
 
-There isn't a specific directories tree required to create an `lxd-compose`
+There isn't a specific directory tree required to create an `lxd-compose`
 project but hereinafter is explained the best practices to start.
 
 ```shell
@@ -44,7 +44,7 @@ $> mkdir -p envs/vars   # Create directory for environment variables (optional)
 ```
 
 The next step is create the `lxd-compose` configuration file. This file is
-on YAML format and is automatically read if it's called `.lxd-compose.yml`.
+using YAML format and is automatically read if it's called `.lxd-compose.yml`.
 
 ```shell
 
@@ -159,4 +159,4 @@ $> lxc list
 +--------------------------+---------+----------------------+-----------------------------------------------+-----------------------+-----------+
 ```
 
-Congratulations! Your first project is been deployed!
+Congratulations! Your first project has been deployed!
