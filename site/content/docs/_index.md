@@ -5,27 +5,27 @@ type: docs
 
 # Why LXD Compose?
 
-While the world trying to move every service over the cloud at the PAAS level
-there are a lot of scenarios that are little or medium and/or yet related to
-the old school with VMs (Vmware, Openstack, QEMU, etc.).
+While the world trying to move every service over to the cloud at 
+the PAAS level and there are a lot of scenarios that vary in relation 
+to the old school with VMs (Vmware, Openstack, QEMU, etc.).
 
-In these scenarios, the use of LXD technology permits to maintain of multi-services
-for container and application OS-based (for example that uses SystemD for their scope).
+In these scenarios, the use of LXD technology allows for the maintenance of multi-services
+for containers and applications that are OS or distro specific. (for example: requiring or avoiding SystemD in their scope).
 
-The use of **lxd-compose** with the tool [simplestreams-builder](https://github.com/MottainaiCI/simplestreams-builder) for the building of LXD images ensure a way to prepare container's images
-for a production environment where setup services in a reproducible way.
-No more worries about rolling updates of the OS used.
+The use of **lxd-compose** with the tool [simplestreams-builder](https://github.com/MottainaiCI/simplestreams-builder) for the building of LXD images ensures a method to cleanly reproduce preparing
+the container's golden images for a production environment.
+No more worries about rolling updates for the OS used.
 
-In the same way, also in the embedded to have a way to deploy services in a
-reproducible it's a wonderful thing. I mean for example to use Banana PI or
-Raspberry PI at home for Home entertainment, home automation, etc. How many
+In the same way, embedded have a way to deploy services in a
+reproducible manner. For example, to use Banana PI or Raspberry PI 
+at home for Home entertainment, home automation, etc. How many
 times did you lose your SD card with the configurations?
 
 It's here that **lxd-compose** wants to help people on tracing their configuration
 and the workflow to follow on setup their infrastructure/services. In particular,
 also to share this workflow with the community.
 
-In the past, I tried to resolve these issues through Ansible for example with
+In the past, I tried to resolve these issues through Ansible with
 the project [FreeRadius Tasks](https://github.com/geaaru/freeradius-tasks) but it's
 too verbose and few dynamic, it requires dependencies and a lot of RAM.
 
@@ -35,12 +35,12 @@ So, in summary, these are the core targets of the **lxd-compose**:
 
 ## Setup LXD instances
 
-LXD has so many features and options that are often configured manually after that you
+LXD has so many features and options that are often configured manually after you
 have installed the instance. These configurations could be applied at the container
-level (in this case are lost when you destroy the container) or at the profile level.
+level (which in this case are lost when you destroy the container) or at the profile level.
 Personally, I suggest using profiles for this job and indeed **lxd-compose** tries
 to share a way to register these profiles used on your configuration service and
-a way to create these profiles from the specs. The same for network devices.
+create these profiles from the specs. The same applies for network devices.
 
 <--->
 
@@ -67,8 +67,8 @@ in a CD/CI pipeline reduce the effort of your team.
 ## Update configurations
 
 **lxd-compose** automatically checks if the container of the project is already
-present and applies only the hooks related to the configuration. This permits
-to update of easily configuration without destroying and create again the container.
+present and applies only the hooks related to the configuration. This permits you
+to update the configuration easily without destroying and creating again the container.
 
 <--->
 
@@ -82,11 +82,12 @@ lxd-compose that reaches one or more LXD instances.
 
 ## Developers's friend
 
-Often it's not always easy for a developer to test his code when other developers
-of the same time working on modules of the same infrastructure.
-**lxd-compose** wants to supply a way to deploy in a fast and reproducible
-way an infrastructure to use for testing and for syncing his code directly in
-the container used by the developer for testing his code.
+Often it's not easy for a developer to test code when other developers
+are, at the same time, working on modules of the same infrastructure.
+**lxd-compose** works to supply a method to quickly, reliably, and repetitively
+deploy an infrastructure for testing and for syncing code directly in
+the container used by the developer for testing code.
 
 {{< /columns >}}
+
 
