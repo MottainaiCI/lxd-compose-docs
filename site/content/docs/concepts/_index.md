@@ -39,3 +39,11 @@ by shell commands execute inside the container or in the host where is run **lxd
 and where the environment is initialized with all the *variables* of the project.
 These *hooks* could be executed in different phases of the deployment and based
 on the choice of the flags.
+
+
+{{< hint info >}}
+At the moment, the execution of hooks and the creation of the containers
+is sequential but in the next releases will be integrate a
+Directed Acyclic Graph (DAG) management of the hooks/tasks for
+parallel deploy or complex scenarios.
+{{< /hint >}}
