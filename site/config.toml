@@ -67,6 +67,10 @@ url = "https://github.com/MottainaiCI/lxd-compose"
 icon = "ion-social-linkedin"
 url = "https://it.linkedin.com/in/danielerondina"
 
+[[params.socialIcon]]
+icon = "ion-social-slack"
+url = "https://join.slack.com/t/luet/shared_invite/enQtOTQxMjcyNDQ0MDUxLWQ5ODVlNTI1MTYzNDRkYzkyYmM1YWE5YjM0NTliNDEzNmQwMTkxNDRhNDIzM2Y5NDBlOTZjZTYxYWQyNDE4YzY"
+
 # Configuration of the Book theme
 # Book configuration
 disablePathToLower = true

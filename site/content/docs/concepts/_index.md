@@ -2,6 +2,7 @@
 bookCollapseSection: true
 title: "Concepts"
 weight: 20
+type: docs
 ---
 
 # Concepts

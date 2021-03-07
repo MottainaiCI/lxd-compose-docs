@@ -1,6 +1,8 @@
 ---
+type: docs
 headless: true
 ---
+
 - [**The Project**]({{< relref "/docs/" >}})
 - [**Getting Started**]({{< relref "/docs/getting-started" >}})
 - [**Concepts**]({{< relref "/docs/concepts" >}})
@@ -10,6 +12,12 @@ headless: true
   - [Nodes]({{< relref "/docs/concepts/node" >}})
   - [Variables]({{< relref "/docs/concepts/variable" >}})
   - [Hooks]({{< relref "/docs/concepts/hook" >}})
+- [**Tutorial**]({{< relref "/docs/tutorial" >}})
+  - [Step1: Install LXD]({{< relref "/docs/tutorial#setup-lxd-environment" >}})
+  - [Step2: Configure LXD Client]({{< relref "/docs/tutorial#step-2-configure-lxd-client" >}})
+  - [Step3: Configure LXD Compose configuration file]({{< relref "/docs/tutorial#step-3-configure-lxd-compose-configuration-file" >}})
+  - [Step4: Configure LXD profiles and networks]({{< relref "/docs/tutorial#step-4-configure-lxd-profiles-and-networks" >}})
+  - [Step5: Create your first project]({{< relref "/docs/tutorial#step-5-create-your-first-project" >}})
 <br />
 - [**LXD Compose Galaxy**]({{< relref "/docs/galaxy" >}})
 - [**Deploy Services on Raspberry Pi**]({{< relref "/docs/galaxy" >}})
