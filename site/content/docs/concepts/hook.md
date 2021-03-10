@@ -163,3 +163,18 @@ hooks:
       - node=$(echo ${node} | jq '.name') && echo "${mysql_temporary_pwd}" > ./secrets/${node}.mysql.pwd
 ```
 
+When `lxd-compose` runs hooks to `host` node it initializes the LXD_CONF variable
+with the same variable of the environment. In this way it is possible to use
+`lxc` command directly on hooks.
+
+```yaml
+hooks:
+- event: post-node-sync
+  node: "host"
+  entrypoint:
+    - "/bin/bash"
+    - "-c"
+  commands:
+    # Copy files from container to host.
+    - lxc file pull --recursive lxd-instance:nginx1/site envs/files/
+```
