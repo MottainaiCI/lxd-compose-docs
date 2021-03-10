@@ -1,0 +1,1 @@
+navigator.serviceWorker&&navigator.serviceWorker.register("/lxd-compose-docs/sw.js",{scope:"/lxd-compose-docs/"})

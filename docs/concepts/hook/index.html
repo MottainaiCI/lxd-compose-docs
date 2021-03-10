@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+  
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hooks</title>
+  <link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+  <!-- Twitter Bootstrs CSS -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+  <!-- Ionicons Fonts Css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+  <!-- animate css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+  <!-- Hero area slider css-->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+  <!-- hover -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+  <!-- template main css file -->
+  
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+  
+	<!-- Custom stylesheet - for your changes -->
+	
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen">
+  
+</head><head>
+  <meta name="generator" content="Hugo 0.81.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hooks</title>
+<link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+<!-- Twitter Bootstrs CSS -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+<!-- Ionicons Fonts Css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+<!-- animate css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+<!-- Hero area slider css-->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+<!-- slick slider -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+<!-- Fancybox -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+<!-- hover -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+<!-- template main css file -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+
+  
+<!-- Custom stylesheet - for your changes -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen"><meta property="og:title" content="Hooks" />
+<meta property="og:description" content="Hooks #  The hooks are the operations that could be done to configure the target services.
+Inside the hook you could define:
+  event: identify the type of the hook
+  node: an optional attribute that define the name of the container where to run the commands. There is a special node host that is used to run the commands on the host where is running lxd-compose" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mottainaici.github.io/lxd-compose-docs/docs/concepts/hook/" /><meta property="article:section" content="docs" />
+
+<meta property="og:site_name" content="LXD Compose" />
+
+<title>Hooks | LXD Compose</title>
+<link rel="manifest" href="/lxd-compose-docs/manifest.json">
+<link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/lxd-compose-docs/book.min.2106ef36e251a4efd568b2b002c1e7f245cee55b79d0697154d486dcbd108c05.css" integrity="sha256-IQbvNuJRpO/VaLKwAsHn8kXO5Vt50GlxVNSG3L0QjAU=">
+<script defer src="/lxd-compose-docs/en.search.min.919d383d9c79f27b410c2994fb7c18ff2f140dc96abb946538306e01ca27e235.js" integrity="sha256-kZ04PZx58ntBDCmU&#43;3wY/y8UDclqu5RlODBuAcon4jU="></script>
+
+<script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head><section class="top-bar animated-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="https://mottainaici.github.io/lxd-compose-docs/">
+						<img src="https://mottainaici.github.io/lxd-compose-docs/images/logo.png" alt="LXD Compose">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+						aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navigation">
+						<ul class="navbar-nav ml-auto">
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/">Home</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/docs">Documentation</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://github.com/MottainaiCI/lxd-compose/issues">Contact</a>
+							</li>
+							
+							
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section><body dir="ltr">
+
+  <div style="margin-top: 60px;">
+
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="" aria-label="" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/"><strong>The Project</strong></a></p>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/getting-started/"><strong>Getting Started</strong></a></p>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/concepts/"><strong>Concepts</strong></a></p>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/">Environments</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/project/">Projects</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/group/">Groups</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/node/">Nodes</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/variable/">Variables</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/hook/"class=active>Hooks</a></li>
+</ul>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/template_engine/"><strong>Template Engine</strong></a></p>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#jinja2-engine">Jinja2 Engine</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#mottainai-engine">Mottainai Engine</a></li>
+</ul>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/tutorial/"><strong>Tutorial</strong></a></p>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#setup-lxd-environment">Step1: Install LXD</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-2-configure-lxd-client">Step2: Configure LXD Client</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-3-configure-lxd-compose-configuration-file">Step3: Configure LXD Compose configuration file</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-4-configure-lxd-profiles-and-networks">Step4: Configure LXD profiles and networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-5-create-your-first-project">Step5: Create your first project</a>
+<br /></li>
+</ul>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>LXD Compose Galaxy</strong></a></p>
+</li>
+<li>
+<p>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>Deploy Services on Raspberry Pi</strong></a></p>
+</li>
+</ul>
+<p><br /></p>
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/MottainaiCI/lxd-compose" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page" >
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/lxd-compose-docs/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Hooks</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="hooks">
+  Hooks
+  <a class="anchor" href="#hooks">#</a>
+</h1>
+<p>The <em>hooks</em> are the operations that could be done to configure the target
+services.</p>
+<p>Inside the hook you could define:</p>
+<ul>
+<li>
+<p><code>event</code>: identify the type of the hook</p>
+</li>
+<li>
+<p><code>node</code>: an optional attribute that define the name of the container
+where to run the commands. There is a special node <code>host</code> that is
+used to run the commands on the host where is running <em>lxd-compose</em></p>
+</li>
+<li>
+<p><code>commands</code>: an array of commands executed in the target node</p>
+</li>
+<li>
+<p><code>out2var</code>: an optional attribute to use when the stdout of the last
+command must be saved as a variable.</p>
+</li>
+<li>
+<p><code>err2var</code>: an optional attribute to use when the stderr of the last
+command must be saved as a variable.</p>
+</li>
+<li>
+<p><code>entrypoint</code>: an optional attribute to override the entrypoint
+used to run the commands.</p>
+</li>
+<li>
+<p><code>flags</code>: an optional list of string that permit to assign a special
+label to an hook that could be used to exclude the hook or for filter
+hooks.</p>
+</li>
+</ul>
+<blockquote class="book-hint warning">
+  If a command defined in a hook fails, the chain is interrupted and lxd-compose exiting
+with error.
+</blockquote>
+
+<h3 id="types-of-events">
+  Types of events
+  <a class="anchor" href="#types-of-events">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>Event Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>pre-project</em></td>
+<td>Hook executed before the deployment phase of the selected project/</td>
+</tr>
+<tr>
+<td><em>pre-group</em></td>
+<td>Hook executed before the deployment of a group/</td>
+</tr>
+<tr>
+<td><em>pre-node-creation</em></td>
+<td>Hook executed before the creation of a node</td>
+</tr>
+<tr>
+<td><em>post-node-creation</em></td>
+<td>Hook executed after the creation of a node</td>
+</tr>
+<tr>
+<td><em>pre-node-sync</em></td>
+<td>Hook executed before the sync phase to a node. Also if there aren&rsquo;t files to sync.</td>
+</tr>
+<tr>
+<td><em>post-node-sync</em></td>
+<td>Hook executed after the sync phase to a node. Also, if there aren&rsquo;t files to sync.</td>
+</tr>
+<tr>
+<td><em>post-group</em></td>
+<td>Hook executed after that all nodes of the group are been creation and/or updated.</td>
+</tr>
+<tr>
+<td><em>post-project</em></td>
+<td>Hook executed at the end of the deployment phase of the selected project.</td>
+</tr>
+</tbody>
+</table>
+<p>The hooks with type <em>pre-node-creation</em> and <em>post-node-creation</em> are executed only
+if the container is not present and it&rsquo;s created by <em>lxd-compose</em>.</p>
+<p>The hooks of the type <em>pre-project</em> or <em>post-project</em> can be defined only
+at project level.</p>
+<p>To reduce the verbosity of the YAML, <em>lxd-compose</em> permits to define hooks used by
+multiple groups or node at different levels.</p>
+<p>The hooks defined to an upper level are merged with the hooks of the bottom level and executed
+in the defined order.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Available Event Types (in the execution order)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>project</td>
+<td><em>pre-project</em><br> <em>pre-group</em><br> <em>pre-node-creation</em><br> <em>post-node-creation</em><br> <em>pre-node-sync</em><br> <em>post-node-sync</em><br> <em>post-group</em><br> <em>post-project</em></td>
+</tr>
+<tr>
+<td>group</td>
+<td><em>pre-group</em><br> <em>pre-node-creation</em><br> <em>post-node-creation</em><br> <em>pre-node-sync</em><br> <em>post-node-sync</em><br> <em>post-group</em></td>
+</tr>
+<tr>
+<td>node</td>
+<td><em>pre-node-creation</em><br> <em>post-node-creation</em><br> <em>pre-node-sync</em><br> <em>post-node-sync</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="hooks-defined-at-project-level-for-all-nodes">
+  Hooks defined at project level for all nodes
+  <a class="anchor" href="#hooks-defined-at-project-level-for-all-nodes">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># Hooks at project level</span>
+<span style="color:#f92672">hooks</span>:
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">pre-project</span>
+    <span style="color:#75715e"># Special node value to execute commands in the host running lxd-compose.</span>
+    <span style="color:#75715e"># The use of sysctl on host it make sense only for local LXD instances.</span>
+    <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;host&#34;</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">sysctl -w vm.max_map_count=262144</span>
+    <span style="color:#f92672">flags</span>:
+      - <span style="color:#ae81ff">host_commands</span>
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-creation</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">ACCEPT_LICENSE=\* equo update &amp;&amp; equo upgrade</span>
+    <span style="color:#f92672">flags</span>:
+      - <span style="color:#ae81ff">update_container</span>
+</code></pre></div><p>This hook is executed after the creation of all nodes of all groups of the project.
+The <code>node</code> attribute is not needed in this case.</p>
+<p>The flag <strong>update_container</strong> permits to exclude the hook on deploy phase.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># This run the hook on all nodes</span>
+$&gt; lxd-compose apply myproject
+<span style="color:#75715e"># This exclude the hooks with flag update_container</span>
+$&gt; lxd-compose apply myproject --disable-flag update_container
+<span style="color:#75715e"># This execute only the hook with the flag update_container</span>
+$&gt; lxd-compose apply myproject --enable-flag update_container
+</code></pre></div><p>If it&rsquo;s used the <code>--enable-flag</code> option and the hook doesn&rsquo;t contain flags then it&rsquo;s skipped.</p>
+<h3 id="hooks-defined-at-group-level-for-all-nodes-or-for-specific-nodes">
+  Hooks defined at group level for all nodes or for specific nodes
+  <a class="anchor" href="#hooks-defined-at-group-level-for-all-nodes-or-for-specific-nodes">#</a>
+</h3>
+<p>In a similar way of the hooks defined at project level the hooks of type <code>pre-node-creation</code>,
+<code>post-node-creation</code>, <code>pre-node-sync</code> and <code>post-node-sync</code> are applied to all nodes.</p>
+<p>A possible use case could be that to use the <code>post-group</code> event to run infrastructure tests
+in the last group of the project.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># List of commands executed just after the creation of the</span>
+<span style="color:#75715e"># container.</span>
+<span style="color:#f92672">hooks</span>:
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-creation</span>
+    <span style="color:#75715e"># Install the python unittest2 package in all nodes.</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">ACCEPT_LICENSE=\* equo i dev-python/unittest2</span>
+
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-group</span>
+    <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;node1&#34;</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">rm /tmp/foo.log</span>
+
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-group</span>
+    <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;node2&#34;</span>
+    <span style="color:#75715e"># The run-tests.sh generate traffic/actions to node1.</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">/root/run-tests.sh</span>
+
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-group</span>
+    <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;node1&#34;</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">sleep 5</span> <span style="color:#75715e"># to manage transmission delays during test</span>
+      - <span style="color:#ae81ff">/root/analyze-result.sh</span>
+</code></pre></div><p>The <code>node</code> field could be related also to node not defined in the project. In this case lxd-compose uses
+the <code>connection</code> of the group where the hook is defined.</p>
+<h3 id="hooks-defined-at-node-level">
+  Hooks defined at node level
+  <a class="anchor" href="#hooks-defined-at-node-level">#</a>
+</h3>
+<p>Also in the hooks defined at node level it&rsquo;s possible to execute hooks on node <code>host</code>, for example,
+an hook that to store the password automatically generated by the single MySQL instance that could be
+needed in additional operations and/or for manual tasks.</p>
+<p>Hereinafter, an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">hooks</span>:
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-creation</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">cat /var/log/mysqld.log | grep temporary | awk &#39;{ print $NF }&#39;</span>
+    <span style="color:#f92672">out2var</span>: <span style="color:#e6db74">&#34;mysql_temporary_pwd&#34;</span>
+  - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-creation</span>
+    <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;host&#34;</span>
+    <span style="color:#f92672">commands</span>:
+      - <span style="color:#ae81ff">node=$(echo ${node} | jq &#39;.name&#39;) &amp;&amp; echo &#34;${mysql_temporary_pwd}&#34; &gt; ./secrets/${node}.mysql.pwd</span>
+</code></pre></div><p>When <code>lxd-compose</code> runs hooks to <code>host</code> node it initializes the LXD_CONF variable
+with the same variable of the environment. In this way it is possible to use
+<code>lxc</code> command directly on hooks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">hooks</span>:
+- <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-sync</span>
+  <span style="color:#f92672">node</span>: <span style="color:#e6db74">&#34;host&#34;</span>
+  <span style="color:#f92672">entrypoint</span>:
+    - <span style="color:#e6db74">&#34;/bin/bash&#34;</span>
+    - <span style="color:#e6db74">&#34;-c&#34;</span>
+  <span style="color:#f92672">commands</span>:
+    <span style="color:#75715e"># Copy files from container to host.</span>
+    - <span style="color:#ae81ff">lxc file pull --recursive lxd-instance:nginx1/site envs/files/</span>
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/MottainaiCI/lxd-compose-docs/edit/master/site/content/docs/concepts/hook.md" target="_blank" rel="noopener">
+      <img src="/lxd-compose-docs/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span></span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+
+  </div><!-- Footer Section Start -->
+<footer id="footer">
+  <div class="container">
+    <div class="row content-justify-between">
+      <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
+        <p class="copyright">Copyright:
+          <span>
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+          </span> Daniele Rondina All Rights Reserved
+        </p>
+      </div>
+      <div class="col-md-4 col-12">
+        <!-- Social Media -->
+        <ul class="social text-center text-md-right text-lg-right">
+          
+          <li><a href="https://github.com/MottainaiCI/lxd-compose"><i class="ion-social-github"></i></a></li>
+          
+          <li><a href="https://it.linkedin.com/in/danielerondina"><i class="ion-social-linkedin"></i></a></li>
+          
+          <li><a href="https://join.slack.com/t/luet/shared_invite/enQtOTQxMjcyNDQ0MDUxLWQ5ODVlNTI1MTYzNDRkYzkyYmM1YWE5YjM0NTliNDEzNmQwMTkxNDRhNDIzM2Y5NDBlOTZjZTYxYWQyNDE4YzY"><i class="ion-social-slack"></i></a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer section end -->
+
+<!-- jquery -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/jQurey/jquery.min.js"></script>
+<!-- slick slider -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.min.js"></script>
+<!-- bootstrap js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- wow js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/wow-js/wow.min.js"></script>
+<!-- slider js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.js"></script>
+<!-- Fancybox -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.js"></script>
+<!-- template main js -->
+
+<script src="https://mottainaici.github.io/lxd-compose-docs/js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
