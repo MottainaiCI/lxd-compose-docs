@@ -68,7 +68,7 @@ icon = "ion-social-linkedin"
 url = "https://it.linkedin.com/in/danielerondina"
 
 [[params.socialIcon]]
-icon = "ion-social-slack"
+icon = "ion-android-chat"
 url = "https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg"
 
 # Configuration of the Book theme
@@ -100,6 +100,10 @@ enableGitInfo = true
 [[menu.after]]
   name = "Github"
   url = "https://github.com/MottainaiCI/lxd-compose"
+  weight = 10
+[[menu.after]]
+  name = "Official Slack Channel"
+  url = "https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg"
   weight = 10
 
 
