@@ -15,7 +15,7 @@ headless: true
 - [**Template Engine**]({{< relref "/docs/template_engine" >}})
   - [Jinja2 Engine]({{< relref "/docs/template_engine#jinja2-engine" >}})
   - [Mottainai Engine]({{< relref "/docs/template_engine#mottainai-engine" >}})
-
+- [**Render Engine**]({{< relref "/docs/render_engine" >}})
 - [**Tutorial**]({{< relref "/docs/tutorial" >}})
   - [Step1: Install LXD]({{< relref "/docs/tutorial#setup-lxd-environment" >}})
   - [Step2: Configure LXD Client]({{< relref "/docs/tutorial#step-2-configure-lxd-client" >}})
