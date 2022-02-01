@@ -11,14 +11,13 @@ type: docs
 
 ## Get LXD Compose
 
-`lxd-compose` is available as Mocaccino OS package and installable in every Linux
+`lxd-compose` is available as [Funtoo Macaroni OS](https://www.macaroni.funtoo.org/) package and installable in every Linux
 distro through [luet](https://luet-lab.github.io/docs/) tool with these steps:
 
 #### Installation
 
 ```bash
-$> curl https://get.mocaccino.org/luet/get_luet_root.sh | sudo sh # Install luet on your system
-$> sudo luet install -y repository/mocaccino-extra-stable # Install Mocaccino Extra repository
+$> curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh # Install luet on your system
 $> sudo luet install -y app-emulation/lxd-compose # Install lxd-compose binary
 $> sudo luet cleanup
 ```

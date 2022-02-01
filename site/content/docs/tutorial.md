@@ -30,20 +30,20 @@ Ubuntu supplies LXD through `snapd` service. There isn't a real package.
 
 {{< /tab >}}
 
-{{< tab "Mocaccino OS" >}}
+{{< tab "Macaroni OS" >}}
 
-This is for *Mocaccino Portage* release:
+This is for *Macaroni Funtoo* release:
 
 ```shell
 $> luet install -y app-emulation/lxd
 ```
 
-Mocaccino Portage is yet in development. Not yet ready to end-users for this.
-
 {{< /tab >}}
 
-{{< tab "Arch Linux" >}}
-WIP
+{{< tab "Funtoo Linux" >}}
+```shell
+$> emerge app-emulation/lxd
+```
 {{< /tab >}}
 
 {{< /tabs >}}
