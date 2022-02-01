@@ -42,8 +42,8 @@ Setup LXD Environment #  Step 1: Install LXD #  Ubuntu Linux $&amp;gt; apt-get i
       
       <guid>https://mottainaici.github.io/lxd-compose-docs/docs/getting-started/</guid>
       <description>Getting Started #  Prerequisites #  lxd-compose doesn&amp;rsquo;t require libraries or tools, just an LXD instance to call.
-Get LXD Compose #  lxd-compose is available as Mocaccino OS package and installable in every Linux distro through luet tool with these steps:
-Installation #  $&amp;gt; curl https://get.mocaccino.org/luet/get_luet_root.sh | sudo sh # Install luet on your system $&amp;gt; sudo luet install -y repository/mocaccino-extra-stable # Install Mocaccino Extra repository $&amp;gt; sudo luet install -y app-emulation/lxd-compose # Install lxd-compose binary $&amp;gt; sudo luet cleanup Upgrade #  $&amp;gt; sudo luet upgrade Create environment tree #  There isn&amp;rsquo;t a specific directory tree required to create an lxd-compose project but hereinafter is explained the best practices to start.</description>
+Get LXD Compose #  lxd-compose is available as Funtoo Macaroni OS package and installable in every Linux distro through luet tool with these steps:
+Installation #  $&amp;gt; curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh # Install luet on your system $&amp;gt; sudo luet install -y app-emulation/lxd-compose # Install lxd-compose binary $&amp;gt; sudo luet cleanup Upgrade #  $&amp;gt; sudo luet upgrade Create environment tree #  There isn&amp;rsquo;t a specific directory tree required to create an lxd-compose project but hereinafter is explained the best practices to start.</description>
     </item>
     
     <item>
@@ -53,6 +53,15 @@ Installation #  $&amp;gt; curl https://get.mocaccino.org/luet/get_luet_root.sh |
       
       <guid>https://mottainaici.github.io/lxd-compose-docs/docs/rpi4/</guid>
       <description>LXD Compose on Raspberry Pi4 #  WIP</description>
+    </item>
+    
+    <item>
+      <title>Render Engine</title>
+      <link>https://mottainaici.github.io/lxd-compose-docs/docs/render_engine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/render_engine/</guid>
+      <description>Render Engine #  The term render engine is used in lxd-compose to identify the engine that is usable to convert lxd-compose specifications where are used template syntax. This conversion is done at runtime directly in loading phase by lxd-compose when is defined a render_default_file or render_values_file.</description>
     </item>
     
     <item>
