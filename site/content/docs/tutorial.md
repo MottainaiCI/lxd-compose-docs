@@ -41,9 +41,15 @@ $> luet install -y app-emulation/lxd
 {{< /tab >}}
 
 {{< tab "Funtoo Linux" >}}
+
+Install and compile LXD with:
+
 ```shell
 $> emerge app-emulation/lxd
 ```
+
+The Funtoo documentaion is available [here](https://www.funtoo.org/LXD).
+
 {{< /tab >}}
 
 {{< /tabs >}}
