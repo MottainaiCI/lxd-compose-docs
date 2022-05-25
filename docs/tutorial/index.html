@@ -82,7 +82,7 @@ Setup LXD Environment #  Step 1: Install LXD #  Ubuntu Linux $&gt; apt-get insta
 <link rel="manifest" href="/lxd-compose-docs/manifest.json">
 <link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/lxd-compose-docs/book.min.2106ef36e251a4efd568b2b002c1e7f245cee55b79d0697154d486dcbd108c05.css" integrity="sha256-IQbvNuJRpO/VaLKwAsHn8kXO5Vt50GlxVNSG3L0QjAU=">
-<script defer src="/lxd-compose-docs/en.search.min.9e88fda4553213e79d0f0e607968010bbd5f2fa735f3b6eaa6b4aa09aedeac58.js" integrity="sha256-noj9pFUyE&#43;edDw5geWgBC71fL6c187bqprSqCa7erFg="></script>
+<script defer src="/lxd-compose-docs/en.search.min.263f4cbd41b6166d36ad485a4c4141e59cbaa9ee06073e652b488be003ca28de.js" integrity="sha256-Jj9MvUG2Fm02rUhaTEFB5Zy6qe4GBz5lK0iL4APKKN4="></script>
 
 <script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
 <!--
@@ -309,11 +309,13 @@ environment if you want to use ZFS with LXD.</p>
   <label for="tabs-uniqueid-1">Macaroni OS</label>
   <div class="book-tabs-content markdown-inner"><p>This is for <em>Macaroni Funtoo</em> release:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$&gt; luet install -y app-emulation/lxd
-</code></pre></div></div><input type="radio" class="toggle" name="tabs-uniqueid" id="tabs-uniqueid-2"  />
+</code></pre></div><p>If you follow the steps described in the <code>step 1b</code> lxd-compose manages the installation itself.</p>
+</div><input type="radio" class="toggle" name="tabs-uniqueid" id="tabs-uniqueid-2"  />
   <label for="tabs-uniqueid-2">Funtoo Linux</label>
   <div class="book-tabs-content markdown-inner"><p>Install and compile LXD with:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$&gt; emerge app-emulation/lxd
 </code></pre></div><p>The Funtoo documentaion is available <a href="https://www.funtoo.org/LXD">here</a>.</p>
+<p>If you follow the steps described in the <code>step 1b</code> lxd-compose manages the installation itself.</p>
 </div></div>
 
 <p>Follow the 
@@ -321,13 +323,181 @@ environment if you want to use ZFS with LXD.</p>
 to install <code>lxd-compose</code> binary.</p>
 <p>Enable LXD API in binding (this is not needed if you want to use <code>local</code>
 remote through unix socket):</p>
+<h4 id="step-1a-setup-lxd-instance-manually">
+  Step 1a: Setup LXD instance manually
+  <a class="anchor" href="#step-1a-setup-lxd-instance-manually">#</a>
+</h4>
+<p>Some initial steps could be done manually for a simple installation.
+So, just after that the service is running proceed with the configuration
+of the API port binding and password with:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$&gt; lxc config set core.https_address <span style="color:#f92672">[</span>::<span style="color:#f92672">]</span>:8443
 $&gt; lxc config set core.trust_password mypassword
-</code></pre></div><p>Create the storage pool:</p>
+</code></pre></div><p>If it&rsquo;s used LXD only with unix socket the previous commands are not needed.</p>
+<p>To create containers and download image it&rsquo;s needed create the default storage:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$&gt; lxc storage create default btrfs size<span style="color:#f92672">=</span>20GB
-</code></pre></div><blockquote class="book-hint info">
+</code></pre></div><p>In the example it used BTRFS loopback mode but there are different options.</p>
+<blockquote class="book-hint info">
   If you setup LXD instance with <code>lxd init --preseed</code> you can setup
 some configurations directly with a YAML source.
+</blockquote>
+
+<h4 id="step-1b-setup-lxd-instance-through-lxd-compose">
+  Step 1b: Setup LXD instance through lxd-compose
+  <a class="anchor" href="#step-1b-setup-lxd-instance-through-lxd-compose">#</a>
+</h4>
+<p>On both 
+  <a href="httsp://www.macaroni.funtoo.org">Macaroni OS</a> and 
+  <a href="https://www.funtoo.org/">Funtoo</a> it is possible to use <code>lxd-compose</code> to setup LXD instance directly with the
+project <code>lxd-setup-and-test</code> from
+
+  <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/">LXD Compose Galaxy Project</a>.</p>
+<p>New OS will be integrated in the future.</p>
+<p>Hereinafter, the steps to follow.</p>
+<ol>
+<li>
+<p>Install <code>lxd-compose</code>, <code>jq</code> and <code>yq</code> tools. Follow these commands or just install from
+your Linux distro the same tools:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+ $&gt; sudo su
+ $&gt; curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh <span style="color:#75715e"># Install luet on your system</span>
+ $&gt; luet install -y app-emulation/lxd-compose utils/jq utils/yq <span style="color:#75715e"># Install lxd-compose binary</span>
+</code></pre></div></li>
+<li>
+<p>Get the LXD Compose Galaxy project</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> $&gt; git clone https://github.com/MottainaiCI/lxd-compose-galaxy.git
+ $&gt; cd lxd-compose-galaxy
+</code></pre></div></li>
+<li>
+<p>Choice the storage type between the available visible with this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+ $&gt; lxd-compose storage list lxd-setup-and-test
+ |    STORAGES    | DRIVER |                         DOCUMENTATION                         |
+ |----------------|--------|---------------------------------------------------------------|
+ | dir-source     | dir    | Directory Storage Pool using existing path /lxd.              |
+ |                |        |                                                               |
+ |                |        | Using --render-env <span style="color:#e6db74">&#34;storage_source=/mydir&#34;</span> to                 |
+ |                |        | override existing /lxd path.                                  |
+ |                |        |                                                               |
+ | btrfs-source   | btrfs  | BTRFS Storage Pool using existing path or device.             |
+ |                |        |                                                               |
+ |                |        | Using --render-env <span style="color:#e6db74">&#34;storage_source=/dev/sdX&#34;</span> to override      |
+ |                |        | default /lxd path.                                            |
+ |                |        |                                                               |
+ | btrfs-loopback | btrfs  | BTRFS Storage Pool Loop disk.                                 |
+ |                |        |                                                               |
+ |                |        | Use --render-env <span style="color:#e6db74">&#34;storage_size=200GB&#34;</span> to override             |
+ |                |        | default 150GB size.                                           |
+ |                |        |                                                               |
+ |                |        | Use --render-env <span style="color:#e6db74">&#34;storage_mount_options=compress=zstd:3&#34;</span>      |
+ |                |        | to enable additional btrfs mount options <span style="color:#66d9ef">for</span> compression      |
+ |                |        | or other.                                                     |
+ |                |        |                                                               |
+ |                |        | Other compressions options:                                   |
+ |                |        |                                                               |
+ |                |        | storage_mount_options<span style="color:#f92672">=</span>rw,relatime,space_cache,compress<span style="color:#f92672">=</span>zstd:3 |
+ |                |        |                                                               |
+ | zfs-source     | zfs    | ZFS Storage pool using existing ZFS Pool or dataset           |
+ |                |        | or create a new ZFS Zpool on the specified device.            |
+ |                |        |                                                               |
+ | zfs-loopback   | zfs    | ZFS Loopback Storage pool.                                    |
+ |                |        |                                                               |
+ |                |        | Use --render-env <span style="color:#e6db74">&#34;zfs_pool_name=pool&#34;</span> to override             |
+ |                |        | default ZFS pool name lxd-compose-pool.                       |
+ |                |        |                                                               |
+ |                |        | Use --render-env <span style="color:#e6db74">&#34;storage_size=XGB&#34;</span> to override               |
+ |                |        | default storage size of 100GB                                 |
+ |                |        |                                                               |
+ | lvm-source     | lvm    | LVM Storage Pool using existing path or device.               |
+ |                |        |                                                               |
+ |                |        | Using --render-env <span style="color:#e6db74">&#34;storage_source=/dev/sdx&#34;</span> to               |
+ |                |        | override existing <span style="color:#e6db74">`</span>lvm<span style="color:#e6db74">`</span> volume group.                         |
+ |                |        |                                                               |
+ | lvm-loopback   | lvm    | LVM Loopback Storage pool.                                    |
+ |                |        |                                                               |
+ | ceph-source    | ceph   | Ceph Storage pool.                                            |
+ |                |        |                                                               |
+ |                |        | NOTE: Not tested.                                             |
+ |                |        |                                                               |
+</code></pre></div><p>The description of the storage could not be describe all possibilies render options.
+After the identification of the storage type it&rsquo;s better check the storage specification
+to see all possible options directly on 
+  <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages">repository</a>.</p>
+</li>
+<li>
+<p>When the storage is selected it&rsquo;s needed create the render values file with the storage options.
+In the example the storage selected is <code>btrfs-loopback</code> with a size of 30GB and with compres:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+ $&gt; echo <span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74"> storage_mount_options: compress=zstd:3
+</span><span style="color:#e6db74"> storage_size: 30GB
+</span><span style="color:#e6db74"> storage_name: btrfs-loopback
+</span><span style="color:#e6db74"> storage_render_values: render/values.yaml
+</span><span style="color:#e6db74"> &#34;</span> &gt; render/values.yaml
+</code></pre></div><p>The last row is needed because the lxd-compose specs executes the <code>lxd-compose storage create</code>
+command after the setup of LXD instance.</p>
+</li>
+<li>
+<p>Define the configuration file of your LXD instance with the editing of the file <code>envs/lxd-setup/vars/common.yaml</code>.</p>
+<p>Between the configuration options it&rsquo;s possible define what are the users and the subuid/subgid to
+use for the management of the unprivileged containers and that will be configured by the execution:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#75715e"># Define the subuid/subguid to create</span>
+ <span style="color:#f92672">lxc_subuids</span>:
+   - <span style="color:#f92672">user</span>: <span style="color:#ae81ff">root</span>
+     <span style="color:#f92672">home</span>: <span style="color:#ae81ff">/root</span>
+     <span style="color:#f92672">map</span>: <span style="color:#ae81ff">1000000-1065535</span>
+
+ <span style="color:#f92672">lxc_subgids</span>:
+   - <span style="color:#f92672">user</span>: <span style="color:#ae81ff">root</span>
+     <span style="color:#f92672">home</span>: <span style="color:#ae81ff">/root</span>
+     <span style="color:#f92672">map</span>: <span style="color:#ae81ff">1000000-1065535</span>
+</code></pre></div><p>And then the LXD instance configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#75715e"># LXD Instance configuration</span>
+ <span style="color:#f92672">lxd_config</span>:
+   <span style="color:#f92672">config</span>:
+     <span style="color:#75715e"># Configure the LXD password</span>
+     <span style="color:#f92672">core.trust_password</span>: <span style="color:#ae81ff">mysecret</span>
+     <span style="color:#75715e"># It seems that for cluster it&#39;s better define the</span>
+     <span style="color:#75715e"># server interface used.</span>
+     <span style="color:#f92672">core.https_address</span>: <span style="color:#e6db74">&#34;[::]:8443&#34;</span>
+
+     <span style="color:#75715e"># Configure HTTPS proxy to use</span>
+     <span style="color:#75715e"># core.proxy_https: &#34;http://192.168.10.1:8080&#34;</span>
+     <span style="color:#75715e"># Configure HTTP proxy to use</span>
+     <span style="color:#75715e"># core.proxy_http: &#34;http://192.168.10.1:8080&#34;</span>
+     <span style="color:#75715e"># Configure Proxy Ignore hosts</span>
+     <span style="color:#75715e"># core.proxy_ignore_hosts</span>
+
+     <span style="color:#75715e"># See https://linuxcontainers.org/lxd/docs/master/server/</span>
+     <span style="color:#75715e"># for all available options.</span>
+
+     <span style="color:#75715e"># Number of days after which an unused cached remote</span>
+     <span style="color:#75715e"># image will be flushed</span>
+     <span style="color:#f92672">images.remote_cache_expiry</span>: <span style="color:#ae81ff">5</span>
+
+     <span style="color:#75715e"># Whether to automatically update any image that</span>
+     <span style="color:#75715e"># LXD caches</span>
+     <span style="color:#75715e"># images.auto_update_cached: true</span>
+
+     <span style="color:#75715e"># Interval in hours at which</span>
+     <span style="color:#75715e"># to look for update to cached images</span>
+     <span style="color:#75715e"># (0 disables it)</span>
+     <span style="color:#75715e"># images.auto_update_interval: 1</span>
+</code></pre></div><p>The selected storage will be configured in the <code>default</code> profile of the LXD instance configured.</p>
+</li>
+<li>
+<p>Now it&rsquo;s time to configure your LXD server and to run <code>lxd-compose</code> in the host where you
+want to do the setup (so use <code>scp</code> if it isn&rsquo;t your node or another tool).</p>
+<p>So, just run this in <code>Macaroni</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> $&gt; lxd-compose a lxd-setup-and-test --render-env <span style="color:#e6db74">&#34;os=macaroni&#34;</span> --render-values render/values.yaml
+</code></pre></div><p>or this in <code>Funtoo</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> $&gt; lxd-compose a lxd-setup-and-test --render-env <span style="color:#e6db74">&#34;os=funtoo&#34;</span> --render-values render/values.yaml
+</code></pre></div><p>Based on the selected OS the <code>lxd-compose</code> will install the packages (with the right PMS) and
+then will configure the LXD instance, it will create the LXD profiles and then it will test the setup.</p>
+</li>
+</ol>
+<blockquote class="book-hint info">
+  You can always setup more of one storage too just using directly the <code>lxd-compose storage create</code>
+command.
 </blockquote>
 
 <h3 id="step-2-configure-lxd-client">
@@ -422,6 +592,11 @@ of the project. You can test it with:</p>
     <span style="color:#f92672">addr</span>: <span style="color:#ae81ff">unix:///var/snap/lxd/common/lxd/unix.socket</span>
     <span style="color:#f92672">public</span>: <span style="color:#66d9ef">false</span>
 </code></pre></div><p>and then to use <code>local-snapd</code> in <code>connection</code> option.</p>
+<blockquote class="book-hint warning">
+  With LXD &gt;=5.0 that contains new features to create multiple file socket with different permissions
+this configuration doesn&rsquo;t work correctly. I will update the documentation correctly soon.
+</blockquote>
+
 <p>Instead, if it&rsquo;s used the HTTPS API this is not needed.</p>
 <h3 id="step-3-configure-lxd-compose-configuration-file">
   Step 3: Configure LXD Compose configuration file
@@ -453,6 +628,13 @@ where <code>lxd-compose</code> search for the environment files.</p>
 with your containers and a particolar network configuration.</p>
 <p>If your profiles are been defined like your network configuration you can
 skip this step.</p>
+<p>If you have used the <code>step 1b</code> a lot of profiles and a network is already
+available and configured.</p>
+<blockquote class="book-hint info">
+  Under the LXD Compose Galaxy project, you can find a lot of examples with
+ready to use profiles that you can add to your project easily.
+</blockquote>
+
 <p>The next step is to create the project environment file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$&gt; mkdir envs/
 $&gt; echo <span style="color:#e6db74">&#34;
