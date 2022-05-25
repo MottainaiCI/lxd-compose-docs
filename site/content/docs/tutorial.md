@@ -38,6 +38,8 @@ This is for *Macaroni Funtoo* release:
 $> luet install -y app-emulation/lxd
 ```
 
+If you follow the steps described in the `step 1b` lxd-compose manages the installation itself.
+
 {{< /tab >}}
 
 {{< tab "Funtoo Linux" >}}
@@ -50,6 +52,8 @@ $> emerge app-emulation/lxd
 
 The Funtoo documentaion is available [here](https://www.funtoo.org/LXD).
 
+If you follow the steps described in the `step 1b` lxd-compose manages the installation itself.
+
 {{< /tab >}}
 
 {{< /tabs >}}
@@ -60,22 +64,215 @@ to install `lxd-compose` binary.
 Enable LXD API in binding (this is not needed if you want to use `local`
 remote through unix socket):
 
+
+#### Step 1a: Setup LXD instance manually
+
+Some initial steps could be done manually for a simple installation.
+So, just after that the service is running proceed with the configuration
+of the API port binding and password with:
+
+ 
 ```shell
 $> lxc config set core.https_address [::]:8443
 $> lxc config set core.trust_password mypassword
 ```
 
-Create the storage pool:
+If it's used LXD only with unix socket the previous commands are not needed.
+
+To create containers and download image it's needed create the default storage:
+
 
 ```shell
 $> lxc storage create default btrfs size=20GB
 ```
+
+In the example it used BTRFS loopback mode but there are different options.
 
 {{< hint info >}}
 If you setup LXD instance with `lxd init --preseed` you can setup
 some configurations directly with a YAML source.
 {{< /hint >}}
 
+#### Step 1b: Setup LXD instance through lxd-compose
+
+On both [Macaroni OS](httsp://www.macaroni.funtoo.org) and [Funtoo](https://www.funtoo.org/) it is possible to use `lxd-compose` to setup LXD instance directly with the
+project `lxd-setup-and-test` from
+[LXD Compose Galaxy Project](https://github.com/MottainaiCI/lxd-compose-galaxy/).
+
+New OS will be integrated in the future.
+
+Hereinafter, the steps to follow.
+
+1. Install `lxd-compose`, `jq` and `yq` tools. Follow these commands or just install from
+   your Linux distro the same tools:
+
+   ```shell
+
+    $> sudo su
+    $> curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh # Install luet on your system
+    $> luet install -y app-emulation/lxd-compose utils/jq utils/yq # Install lxd-compose binary
+   ```
+
+2. Get the LXD Compose Galaxy project
+
+   ```shell
+    $> git clone https://github.com/MottainaiCI/lxd-compose-galaxy.git
+    $> cd lxd-compose-galaxy
+   ```
+
+3. Choice the storage type between the available visible with this command:
+
+   ```shell
+
+    $> lxd-compose storage list lxd-setup-and-test
+    |    STORAGES    | DRIVER |                         DOCUMENTATION                         |
+    |----------------|--------|---------------------------------------------------------------|
+    | dir-source     | dir    | Directory Storage Pool using existing path /lxd.              |
+    |                |        |                                                               |
+    |                |        | Using --render-env "storage_source=/mydir" to                 |
+    |                |        | override existing /lxd path.                                  |
+    |                |        |                                                               |
+    | btrfs-source   | btrfs  | BTRFS Storage Pool using existing path or device.             |
+    |                |        |                                                               |
+    |                |        | Using --render-env "storage_source=/dev/sdX" to override      |
+    |                |        | default /lxd path.                                            |
+    |                |        |                                                               |
+    | btrfs-loopback | btrfs  | BTRFS Storage Pool Loop disk.                                 |
+    |                |        |                                                               |
+    |                |        | Use --render-env "storage_size=200GB" to override             |
+    |                |        | default 150GB size.                                           |
+    |                |        |                                                               |
+    |                |        | Use --render-env "storage_mount_options=compress=zstd:3"      |
+    |                |        | to enable additional btrfs mount options for compression      |
+    |                |        | or other.                                                     |
+    |                |        |                                                               |
+    |                |        | Other compressions options:                                   |
+    |                |        |                                                               |
+    |                |        | storage_mount_options=rw,relatime,space_cache,compress=zstd:3 |
+    |                |        |                                                               |
+    | zfs-source     | zfs    | ZFS Storage pool using existing ZFS Pool or dataset           |
+    |                |        | or create a new ZFS Zpool on the specified device.            |
+    |                |        |                                                               |
+    | zfs-loopback   | zfs    | ZFS Loopback Storage pool.                                    |
+    |                |        |                                                               |
+    |                |        | Use --render-env "zfs_pool_name=pool" to override             |
+    |                |        | default ZFS pool name lxd-compose-pool.                       |
+    |                |        |                                                               |
+    |                |        | Use --render-env "storage_size=XGB" to override               |
+    |                |        | default storage size of 100GB                                 |
+    |                |        |                                                               |
+    | lvm-source     | lvm    | LVM Storage Pool using existing path or device.               |
+    |                |        |                                                               |
+    |                |        | Using --render-env "storage_source=/dev/sdx" to               |
+    |                |        | override existing `lvm` volume group.                         |
+    |                |        |                                                               |
+    | lvm-loopback   | lvm    | LVM Loopback Storage pool.                                    |
+    |                |        |                                                               |
+    | ceph-source    | ceph   | Ceph Storage pool.                                            |
+    |                |        |                                                               |
+    |                |        | NOTE: Not tested.                                             |
+    |                |        |                                                               |
+   ```
+
+   The description of the storage could not be describe all possibilies render options.
+   After the identification of the storage type it's better check the storage specification
+   to see all possible options directly on [repository](https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages).
+
+4. When the storage is selected it's needed create the render values file with the storage options.
+   In the example the storage selected is `btrfs-loopback` with a size of 30GB and with compres:
+
+   ```shell
+
+    $> echo "
+    storage_mount_options: compress=zstd:3
+    storage_size: 30GB
+    storage_name: btrfs-loopback
+    storage_render_values: render/values.yaml
+    " > render/values.yaml
+   ```
+
+   The last row is needed because the lxd-compose specs executes the `lxd-compose storage create`
+   command after the setup of LXD instance.
+
+5. Define the configuration file of your LXD instance with the editing of the file `envs/lxd-setup/vars/common.yaml`.
+
+   Between the configuration options it's possible define what are the users and the subuid/subgid to
+   use for the management of the unprivileged containers and that will be configured by the execution:
+
+   ```yaml
+    # Define the subuid/subguid to create
+    lxc_subuids:
+      - user: root
+        home: /root
+        map: 1000000-1065535
+
+    lxc_subgids:
+      - user: root
+        home: /root
+        map: 1000000-1065535
+   ```
+
+   And then the LXD instance configuration:
+
+   ```yaml
+    # LXD Instance configuration
+    lxd_config:
+      config:
+        # Configure the LXD password
+        core.trust_password: mysecret
+        # It seems that for cluster it's better define the
+        # server interface used.
+        core.https_address: "[::]:8443"
+
+        # Configure HTTPS proxy to use
+        # core.proxy_https: "http://192.168.10.1:8080"
+        # Configure HTTP proxy to use
+        # core.proxy_http: "http://192.168.10.1:8080"
+        # Configure Proxy Ignore hosts
+        # core.proxy_ignore_hosts
+
+        # See https://linuxcontainers.org/lxd/docs/master/server/
+        # for all available options.
+
+        # Number of days after which an unused cached remote
+        # image will be flushed
+        images.remote_cache_expiry: 5
+
+        # Whether to automatically update any image that
+        # LXD caches
+        # images.auto_update_cached: true
+
+        # Interval in hours at which
+        # to look for update to cached images
+        # (0 disables it)
+        # images.auto_update_interval: 1
+   ```
+
+   The selected storage will be configured in the `default` profile of the LXD instance configured.
+
+5. Now it's time to configure your LXD server and to run `lxd-compose` in the host where you
+   want to do the setup (so use `scp` if it isn't your node or another tool).
+
+   So, just run this in `Macaroni`:
+
+   ```shell
+    $> lxd-compose a lxd-setup-and-test --render-env "os=macaroni" --render-values render/values.yaml
+   ```
+
+   or this in `Funtoo`:
+
+   ```shell
+    $> lxd-compose a lxd-setup-and-test --render-env "os=funtoo" --render-values render/values.yaml
+   ```
+
+   Based on the selected OS the `lxd-compose` will install the packages (with the right PMS) and
+   then will configure the LXD instance, it will create the LXD profiles and then it will test the setup.
+
+
+{{< hint info >}}
+You can always setup more of one storage too just using directly the `lxd-compose storage create`
+command.
+{{< /hint >}}
 
 ### Step 2: Configure LXD client
 
@@ -182,6 +379,11 @@ This means that to use `local` connection it's better to create under the config
 
 and then to use `local-snapd` in `connection` option.
 
+{{< hint warning >}}
+With LXD >=5.0 that contains new features to create multiple file socket with different permissions
+this configuration doesn't work correctly. I will update the documentation correctly soon.
+{{< /hint >}}
+
 Instead, if it's used the HTTPS API this is not needed.
 
 ### Step 3: Configure LXD Compose configuration file
@@ -217,6 +419,13 @@ with your containers and a particolar network configuration.
 If your profiles are been defined like your network configuration you can
 skip this step.
 
+If you have used the `step 1b` a lot of profiles and a network is already
+available and configured.
+
+{{< hint info >}}
+Under the LXD Compose Galaxy project, you can find a lot of examples with
+ready to use profiles that you can add to your project easily.
+{{< /hint >}}
 
 The next step is to create the project environment file:
 
