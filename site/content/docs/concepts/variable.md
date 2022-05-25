@@ -67,6 +67,13 @@ labels:
   label1: "1"
 ```
 
+The node `labels` help to setup single node variables and when defined these options are
+also configured as container `user.*` configuration params.
+Normally, this variables could be used over LXD template engine integrated inside the LXD image
+and so a label with name `myvar` will be added inside the container configuration option as
+`user.myvar`.
+
+
 ### Runtime variables
 
 It's possible set variable on deploy a project from CLI:
