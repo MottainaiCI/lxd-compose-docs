@@ -22,7 +22,17 @@ The *environments* are characterized of from these properties or elements:
     by the projects.
 
   * `networks`: the list of LXD networks used by the environment
-    thta could be added and/or updated on the LXD instances used
+    that could be added and/or updated on the LXD instances used
+    by the projects.
+
+  * `commands`: the list of commands defined related to the projects
+    of the environment. It's helpful to have a register of the more useful
+    commands to run on a running system for backup, validation, etc.
+    The commands are aliases of `apply` command where it's possible
+    define flags, additional hooks, etc.
+
+  * `storages`: the list of LXD storages used by the environment
+    that could be added and/or updated on the LXD instances used
     by the projects.
 
   * `projects`: the projects to deploy.
@@ -30,6 +40,10 @@ The *environments* are characterized of from these properties or elements:
 **lxd-compose** read all files under the directories defined on the paramater `env_dirs`
 of the configuration file and load the specification of all projects in memory before
 run commands.
+
+The `profiles`, `networks`, `storages` and `commands` are all loaded and rendered
+through the LXD Compose render engine that permit to customize the entities without
+create multiple time the same resource but with few differences.
 
 Hereinafter, an extract of the configuration file available on [LXD Compose Galaxy](https://github.com/MottainaiCI/lxd-compose-galaxy/blob/master/.lxd-compose):
 
@@ -106,8 +120,6 @@ instead the *template engine* defined inside the environment is used as template
 for the files to use inside the deploy workflow.
 {{< /hint >}}
 
-***
-
 {{< hint warning >}}
 It’s a good practice avoid to use group names equal across different projects or nodes
 with equals names because inside the project it’s possible to define a hook to execute
@@ -141,6 +153,9 @@ profiles:
 This is section is used only for tracing the profiles needed by the infrastructure.
 It is possible create and/or update profiles through the `lxd-compose profile` subcommand.
 
+The definition of the profiles could be inline over the environment YAML or with external files
+through the `include_profiles_files` attribute.
+
 #### Networks
 
 In a similar way, inside an environment file it's possible define the list of
@@ -165,3 +180,64 @@ networks:
 To show all possible configurations for both `networks` and `profiles` there is the
 [LXD documentation](https://lxd.readthedocs.io/en/latest/configuration/). **lxd-compose** maps
 the API configurations directly.
+
+Some examples are available on [LXD Compose Galaxy](https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/networks).
+
+The definition of the networks could be inline over the environment YAML or with external files
+through the `include_networks_files` attribute.
+
+#### Commands
+
+The commands have different missions:
+
+1. permit to define and register maintenance tasks and/or particolar hooks to run over
+   existing container of already deployed projects. An example could the task that update
+   the lencrypt certificate of existing HTTP service.
+
+2. permit to deploy a specific project with customization (different vars files, flags, etc.).
+   For example, the task to build LXD images over LXD Compose Galaxy is a single project that
+   supply different commands as shortcuts for build the different LXD images.
+
+Inside the environment file the commands could be defined inline:
+
+```yaml
+commands:
+  - name: mottainai-proxy-update-cerbot
+    description: |
+      Update letencrypt certificate
+      on mottainai Proxy.
+
+      NOTE: the container must be already created.
+
+    project: mottainai-server-services
+    apply_alias: true
+    enable_groups:
+      - mottainai-proxy1
+    enable_flags:
+      - certbot_standalone
+```
+
+or through includes:
+
+```yaml
+include_commands_files:
+- commands/certbot.yml
+- commands/backup-certbot.yml
+```
+
+Obviously, using `include_commands_files` permit to reuse the same command over multiple projects.
+
+#### Storages
+
+Inside LXD there are different way to setup the LXD storage: btrfs, zfs, lvm, loopback, etc.
+
+The storage is the main element when an LXD instance is configured. This is the reason why
+it's important to trace the configurations option used over a specific remote.
+
+The [LXD Compose Galaxy](https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages) has already a good list of possible configuration that could be used by the users in
+their projects.
+
+The storage specs could be defined inside the environment YAML inline or as included
+files through the `include_storages_files` attribute.
+
+
