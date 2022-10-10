@@ -119,8 +119,7 @@ projects:
               - event: post-node-creation
                 commands:
                   - apk add curl
-                  - curl --no-progress-meter https://get.mocaccino.org/luet/get_luet_root.sh | sh
-                  - luet install repository/mocaccino-extra
+                  - curl --no-pregress-meter https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh
                   - luet install utils/jq
                   - echo "${node}" | jq
 
