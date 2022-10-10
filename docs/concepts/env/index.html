@@ -83,7 +83,7 @@
 <link rel="manifest" href="/lxd-compose-docs/manifest.json">
 <link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/lxd-compose-docs/book.min.2106ef36e251a4efd568b2b002c1e7f245cee55b79d0697154d486dcbd108c05.css" integrity="sha256-IQbvNuJRpO/VaLKwAsHn8kXO5Vt50GlxVNSG3L0QjAU=">
-<script defer src="/lxd-compose-docs/en.search.min.350fd8fb55c65d3dec2c04112d69a311d86c418b3c707f3ff0ba7e19cca2f8b0.js" integrity="sha256-NQ/Y&#43;1XGXT3sLAQRLWmjEdhsQYs8cH8/8Lp&#43;Gcyi&#43;LA="></script>
+<script defer src="/lxd-compose-docs/en.search.min.5bfc41f7f19ff068b9793204e9329522ca5a2306658bbbc7f1b754eaf50cc6c0.js" integrity="sha256-W/xB9/Gf8Gi5eTIE6TKVIspaIwZli7vH8bdU6vUMxsA="></script>
 
 <script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
 <!--
@@ -304,7 +304,19 @@ by the projects.</p>
 </li>
 <li>
 <p><code>networks</code>: the list of LXD networks used by the environment
-thta could be added and/or updated on the LXD instances used
+that could be added and/or updated on the LXD instances used
+by the projects.</p>
+</li>
+<li>
+<p><code>commands</code>: the list of commands defined related to the projects
+of the environment. It&rsquo;s helpful to have a register of the more useful
+commands to run on a running system for backup, validation, etc.
+The commands are aliases of <code>apply</code> command where it&rsquo;s possible
+define flags, additional hooks, etc.</p>
+</li>
+<li>
+<p><code>storages</code>: the list of LXD storages used by the environment
+that could be added and/or updated on the LXD instances used
 by the projects.</p>
 </li>
 <li>
@@ -314,6 +326,9 @@ by the projects.</p>
 <p><strong>lxd-compose</strong> read all files under the directories defined on the paramater <code>env_dirs</code>
 of the configuration file and load the specification of all projects in memory before
 run commands.</p>
+<p>The <code>profiles</code>, <code>networks</code>, <code>storages</code> and <code>commands</code> are all loaded and rendered
+through the LXD Compose render engine that permit to customize the entities without
+create multiple time the same resource but with few differences.</p>
 <p>Hereinafter, an extract of the configuration file available on 
   <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/blob/master/.lxd-compose">LXD Compose Galaxy</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">general</span>:
@@ -363,7 +378,6 @@ instead the <em>template engine</em> defined inside the environment is used as t
 for the files to use inside the deploy workflow.
 </blockquote>
 
-<hr>
 <blockquote class="book-hint warning">
   It’s a good practice avoid to use group names equal across different projects or nodes
 with equals names because inside the project it’s possible to define a hook to execute
@@ -392,6 +406,8 @@ duplicate at the moment.
       <span style="color:#f92672">type</span>: <span style="color:#ae81ff">proxy</span>
 </code></pre></div><p>This is section is used only for tracing the profiles needed by the infrastructure.
 It is possible create and/or update profiles through the <code>lxd-compose profile</code> subcommand.</p>
+<p>The definition of the profiles could be inline over the environment YAML or with external files
+through the <code>include_profiles_files</code> attribute.</p>
 <h4 id="networks">
   Networks
   <a class="anchor" href="#networks">#</a>
@@ -415,6 +431,59 @@ network device or bridge used by the LXD instances.</p>
 
   <a href="https://lxd.readthedocs.io/en/latest/configuration/">LXD documentation</a>. <strong>lxd-compose</strong> maps
 the API configurations directly.</p>
+<p>Some examples are available on 
+  <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/networks">LXD Compose Galaxy</a>.</p>
+<p>The definition of the networks could be inline over the environment YAML or with external files
+through the <code>include_networks_files</code> attribute.</p>
+<h4 id="commands">
+  Commands
+  <a class="anchor" href="#commands">#</a>
+</h4>
+<p>The commands have different missions:</p>
+<ol>
+<li>
+<p>permit to define and register maintenance tasks and/or particolar hooks to run over
+existing container of already deployed projects. An example could the task that update
+the lencrypt certificate of existing HTTP service.</p>
+</li>
+<li>
+<p>permit to deploy a specific project with customization (different vars files, flags, etc.).
+For example, the task to build LXD images over LXD Compose Galaxy is a single project that
+supply different commands as shortcuts for build the different LXD images.</p>
+</li>
+</ol>
+<p>Inside the environment file the commands could be defined inline:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">commands</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mottainai-proxy-update-cerbot</span>
+    <span style="color:#f92672">description</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">      Update letencrypt certificate
+</span><span style="color:#e6db74">      on mottainai Proxy.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">      NOTE: the container must be already created.</span>      
+
+    <span style="color:#f92672">project</span>: <span style="color:#ae81ff">mottainai-server-services</span>
+    <span style="color:#f92672">apply_alias</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">enable_groups</span>:
+      - <span style="color:#ae81ff">mottainai-proxy1</span>
+    <span style="color:#f92672">enable_flags</span>:
+      - <span style="color:#ae81ff">certbot_standalone</span>
+</code></pre></div><p>or through includes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">include_commands_files</span>:
+- <span style="color:#ae81ff">commands/certbot.yml</span>
+- <span style="color:#ae81ff">commands/backup-certbot.yml</span>
+</code></pre></div><p>Obviously, using <code>include_commands_files</code> permit to reuse the same command over multiple projects.</p>
+<h4 id="storages">
+  Storages
+  <a class="anchor" href="#storages">#</a>
+</h4>
+<p>Inside LXD there are different way to setup the LXD storage: btrfs, zfs, lvm, loopback, etc.</p>
+<p>The storage is the main element when an LXD instance is configured. This is the reason why
+it&rsquo;s important to trace the configurations option used over a specific remote.</p>
+<p>The 
+  <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages">LXD Compose Galaxy</a> has already a good list of possible configuration that could be used by the users in
+their projects.</p>
+<p>The storage specs could be defined inside the environment YAML inline or as included
+files through the <code>include_storages_files</code> attribute.</p>
 </article>
  
       
