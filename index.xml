@@ -5,17 +5,7 @@
     <link>https://mottainaici.github.io/lxd-compose-docs/</link>
     <description>Recent content on LXD Compose</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 27 Feb 2021 15:17:52 +0100</lastBuildDate><atom:link href="https://mottainaici.github.io/lxd-compose-docs/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Documentation</title>
-      <link>https://mottainaici.github.io/lxd-compose-docs/docs/main/</link>
-      <pubDate>Sat, 27 Feb 2021 15:17:52 +0100</pubDate>
-      
-      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/main/</guid>
-      <description>Acerbo datus maxime #  Astris ipse furtiva Est in vagis et Pittheus tu arge accipiter regia iram vocatur nurus. Omnes ut olivae sensit arma sorori deducit, inesset crudus, ego vetuere aliis, modo arsit? Utinam rapta fiducia valuere litora adicit cursu, ad facies  Suis quot vota Ea furtique risere fratres edidit terrae magis. Colla tam mihi tenebat: miseram excita suadent es pecudes iam. Concilio quam velatus posset ait quod nunc!</description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://mottainaici.github.io/lxd-compose-docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
       <link>https://mottainaici.github.io/lxd-compose-docs/docs/tutorial/</link>
@@ -24,6 +14,16 @@
       <guid>https://mottainaici.github.io/lxd-compose-docs/docs/tutorial/</guid>
       <description>Tutorial #  Hereinafter, how to create your first project in five steps. Enjoy!
 Setup LXD Environment #  Step 1: Install LXD #  Ubuntu Linux $&amp;gt; apt-get install lxd-installer $&amp;gt; apt-get install zfsutils-linux $&amp;gt; apt-get install curl In Ubuntu LXD is not available as a single package, but it uses snapd, so lxd-installer is the installer package of LXD. The installation of zfsutils is not mandatory but it prepares the environment if you want to use ZFS with LXD.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://mottainaici.github.io/lxd-compose-docs/docs/vmware/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/vmware/</guid>
+      <description>LXD Compose &amp;amp; VMWare #  The mission of this section is try to describe some use cases about using LXD Compose over a VMWare stack to supply production-ready services and help the systemist and developers life.
+In particular, over my work experiences I saw a lot of different requirements exposed by my Clients. Just to help the reader I will try to describe in addition of the behavior of the specific use case what are the pro &amp;amp; cons.</description>
     </item>
     
     <item>
