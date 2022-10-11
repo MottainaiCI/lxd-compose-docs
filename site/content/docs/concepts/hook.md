@@ -40,14 +40,20 @@ with error.
 
 | Event Type | Description |
 | ---------- | ----------- |
-| *pre-project* | Hook executed before the deployment phase of the selected project/ |
-| *pre-group* | Hook executed before the deployment of a group/ |
+| *pre-project* | Hook executed before the deployment phase of the selected project. |
+| *pre-group* | Hook executed before the deployment of a group. |
 | *pre-node-creation*  | Hook executed before the creation of a node |
 | *post-node-creation* | Hook executed after the creation of a node |
 | *pre-node-sync* | Hook executed before the sync phase to a node. Also if there aren't files to sync. |
 | *post-node-sync* | Hook executed after the sync phase to a node. Also, if there aren't files to sync. |
 | *post-group* | Hook executed after that all nodes of the group are been creation and/or updated. |
 | *post-project* | Hook executed at the end of the deployment phase of the selected project.
+| *pre-project-shutdown* | Hook executed before the execution of the destroy actions of the select project. |
+| *post-project-shutdown* | Hook executed after that the project and groups are been destroyed. |
+| *pre-group-shutdown* | Hook executed before the execution of the destroy of the nodes of the group. |
+| *post-group-shutdown* | Hook executed after the execution of the destroy of the nodes of the group. |
+| *pre-node-shutdown* | Hook executed before the execution of the destroy of the node. |
+| *post-node-shutdown* | Hook executed after the execution of the destroy of the node. |
 
 The hooks with type *pre-node-creation* and *post-node-creation* are executed only
 if the container is not present and it's created by *lxd-compose*.
@@ -59,13 +65,22 @@ To reduce the verbosity of the YAML, *lxd-compose* permits to define hooks used 
 multiple groups or node at different levels.
 
 The hooks defined to an upper level are merged with the hooks of the bottom level and executed
-in the defined order.
+in the defined order for the `apply` operations:
 
 | Level | Available Event Types (in the execution order) |
 | ----- | --------------------- |
 | project | *pre-project*<br> *pre-group*<br> *pre-node-creation*<br> *post-node-creation*<br> *pre-node-sync*<br> *post-node-sync*<br> *post-group*<br> *post-project* |
 | group | *pre-group*<br> *pre-node-creation*<br> *post-node-creation*<br> *pre-node-sync*<br> *post-node-sync*<br> *post-group* |
 | node | *pre-node-creation*<br> *post-node-creation*<br> *pre-node-sync*<br> *post-node-sync* |
+
+
+Hereinafter, the order for the `destroy` command:
+
+| Level | Available Event Types (in the execution order) |
+| ----- | --------------------- |
+| project | *pre-project-shutdown*<br> *pre-group-shutdown*<br> *pre-node-shutdown*<br> *post-node-shutdown*<br> *post-group-shutdown*<br> *post-project-shutdown* |
+| group | *pre-group-shutdown*<br> *pre-node-shutdown*<br> *post-node-shutdown*<br> *post-group-shutdown* |
+| node | *pre-node-shutdown*<br> *post-node-shutdown* |
 
 ### Hooks defined at project level for all nodes
 
