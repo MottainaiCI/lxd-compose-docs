@@ -234,10 +234,22 @@ Inside LXD there are different way to setup the LXD storage: btrfs, zfs, lvm, lo
 The storage is the main element when an LXD instance is configured. This is the reason why
 it's important to trace the configurations option used over a specific remote.
 
-The [LXD Compose Galaxy](https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages) has already a good list of possible configuration that could be used by the users in
+The [LXD Compose Galaxy](https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/storages)
+has already a good list of possible configurationa that could be used by the users in
 their projects.
 
 The storage specs could be defined inside the environment YAML inline or as included
 files through the `include_storages_files` attribute.
 
+An example of btrfs loopback storage:
+
+```yaml
+name: "btrfs-loopback"
+documentation: |
+  BTRFS Storage Pool Loop disk.
+driver: "btrfs"
+config:
+  size: "150GB"
+  btrfs.mount_options: "rw,relatime,space_cache,compress=zstd:3"
+```
 

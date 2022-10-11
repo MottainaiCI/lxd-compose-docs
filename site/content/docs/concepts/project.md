@@ -28,6 +28,11 @@ In particular, inside the project you could define:
     If the path is relative this is based on the directory where is present
     the environment file that contains the project.
 
+  * `include_hooks_files`: an optional attribute that permit to define the list
+    of files where are defined the hooks of the project.
+    If the path is relative this is based on the directory where is present
+    the environment file that contains the project.
+
   * `vars`: an optional attribute to define inline project variables.
 
   * `groups`: an optional attribute to define inline groups of the project.

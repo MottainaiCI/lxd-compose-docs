@@ -347,3 +347,9 @@ template {
 [hidden] {
   display: none;
 }
+
+img[src*='#vmware'] {
+    display: block;
+    margin: auto;
+    width: 800px;
+}

@@ -384,6 +384,13 @@ With LXD >=5.0 that contains new features to create multiple file socket with di
 this configuration doesn't work correctly. I will update the documentation correctly soon.
 {{< /hint >}}
 
+{{< hint warning >}}
+At the moment on Ubuntu the `lxc` command is supplied through snapd and it seems that
+that wrapper doesn't propagate the environments variables to real binary. This means that
+override `LXD_CONF`  doesn't work. The LXD remotes must be modified only in the snapd path.
+Personally, I prefer to use OS where `lxc` is supplied as binary directly.
+{{< /hint >}}
+
 Instead, if it's used the HTTPS API this is not needed.
 
 ### Step 3: Configure LXD Compose configuration file

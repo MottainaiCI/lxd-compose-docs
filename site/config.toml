@@ -105,6 +105,10 @@ enableGitInfo = true
   name = "Official Slack Channel"
   url = "https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg"
   weight = 10
+[[menu.after]]
+  name = "Support our work!"
+  url = "https://github.com/sponsors/geaaru"
+  weight = 12
 
 
 [params]
