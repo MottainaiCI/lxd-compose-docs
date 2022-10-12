@@ -28,6 +28,7 @@ headless: true
   - [Step5: Create your first project]({{< relref "/docs/tutorial#step-5-create-your-first-project" >}})
 <br />
 - [**LXD Compose & VMWare**]({{< relref "/docs/vmware" >}})
+  - [VmWare-LXD 1:1]({{< relref "/docs/vmware-1-1" >}})
 - [**LXD Compose Galaxy**]({{< relref "/docs/galaxy" >}})
 - [**Deploy Services on Raspberry Pi**]({{< relref "/docs/galaxy" >}})
 
