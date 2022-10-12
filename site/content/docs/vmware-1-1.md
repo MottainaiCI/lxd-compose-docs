@@ -355,7 +355,7 @@ envs:
     #   domain: <domain1>,<domain2>
     - ip: "10.10.10.1"
       domain: nginx-backend01
-    - ip: "10.10.10.1"
+    - ip: "10.10.10.2"
       domain: nginx-backend02
 
   nginx1_net:
