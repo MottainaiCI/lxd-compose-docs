@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+  
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+  <!-- Twitter Bootstrs CSS -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+  <!-- Ionicons Fonts Css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+  <!-- animate css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+  <!-- Hero area slider css-->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+  <!-- hover -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+  <!-- template main css file -->
+  
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+  
+	<!-- Custom stylesheet - for your changes -->
+	
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen">
+  
+</head><head>
+  <meta name="generator" content="Hugo 0.81.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+<link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+<!-- Twitter Bootstrs CSS -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+<!-- Ionicons Fonts Css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+<!-- animate css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+<!-- Hero area slider css-->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+<!-- slick slider -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+<!-- Fancybox -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+<!-- hover -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+<!-- template main css file -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+
+  
+<!-- Custom stylesheet - for your changes -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen"><meta property="og:title" content="" />
+<meta property="og:description" content="VmWare-LXD 1:1 #  In the Kata Containers technology it&rsquo;s used an Hardware Virtualization to supply an additional isolation with a lightweight VM and individual kernels.
+In a similar way the use case describe here try to use a single Linux VM over VmWare where install a standalone LXD instance and then through lxd-compose deploy one or more services using a Physical vNic that is managed by LXD and added from the VM to the Container deployed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mottainaici.github.io/lxd-compose-docs/docs/vmware-1-1/" /><meta property="article:section" content="docs" />
+
+<meta property="og:site_name" content="LXD Compose" />
+
+<title>Vmware 1 1 | LXD Compose</title>
+<link rel="manifest" href="/lxd-compose-docs/manifest.json">
+<link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/lxd-compose-docs/book.min.2df5259632732379294ae606e78452d74cd92840b21effd36ae60304bd0bdc98.css" integrity="sha256-LfUlljJzI3kpSuYG54RS10zZKECyHv/TauYDBL0L3Jg=">
+<script defer src="/lxd-compose-docs/en.search.min.cd13276eb2c5eb9bb772f2690e2922d39a279f16bf6094536f16c47b877214ff.js" integrity="sha256-zRMnbrLF65u3cvJpDiki05onnxa/YJRTbxbEe4dyFP8="></script>
+
+<script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head><section class="top-bar animated-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="https://mottainaici.github.io/lxd-compose-docs/">
+						<img src="https://mottainaici.github.io/lxd-compose-docs/images/logo.png" alt="LXD Compose">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+						aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navigation">
+						<ul class="navbar-nav ml-auto">
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/">Home</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/docs">Documentation</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://github.com/MottainaiCI/lxd-compose/issues">Contact</a>
+							</li>
+							
+							
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section><body dir="ltr">
+
+  <div style="margin-top: 60px;">
+
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="" aria-label="" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+  <a href="/lxd-compose-docs/docs/"><strong>The Project</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/getting-started/"><strong>Getting Started</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/"><strong>Concepts</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/">Environments</a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#profiles">Profiles</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#networks">Networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#commands">Commands</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#storages">Storages</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/project/">Projects</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/group/">Groups</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/node/">Nodes</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/variable/">Variables</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/hook/">Hooks</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/"><strong>Template Engine</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#jinja2-engine">Jinja2 Engine</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#mottainai-engine">Mottainai Engine</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/render_engine/"><strong>Render Engine</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/"><strong>Tutorial</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#setup-lxd-environment">Step1: Install LXD</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-2-configure-lxd-client">Step2: Configure LXD Client</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-3-configure-lxd-compose-configuration-file">Step3: Configure LXD Compose configuration file</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-4-configure-lxd-profiles-and-networks">Step4: Configure LXD profiles and networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-5-create-your-first-project">Step5: Create your first project</a>
+<br /></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/vmware/"><strong>LXD Compose &amp; VMWare</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/vmware-1-1/"class=active>VmWare-LXD 1:1</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>LXD Compose Galaxy</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>Deploy Services on Raspberry Pi</strong></a></li>
+</ul>
+<p><br /></p>
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/MottainaiCI/lxd-compose" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg" target="_blank" rel="noopener">
+        Official Slack Channel
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/sponsors/geaaru" target="_blank" rel="noopener">
+        Support our work!
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page" >
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/lxd-compose-docs/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Vmware 1 1</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="vmware-lxd-11">
+  VmWare-LXD 1:1
+  <a class="anchor" href="#vmware-lxd-11">#</a>
+</h1>
+<p>In the 
+  <a href="https://katacontainers.io/">Kata Containers</a> technology it&rsquo;s used
+an Hardware Virtualization to supply an additional isolation with a lightweight VM
+and individual kernels.</p>
+<p>In a similar way the use case describe here try to use a single Linux VM over VmWare
+where install a standalone LXD instance and then through <code>lxd-compose</code> deploy one or
+more services using a Physical vNic that is managed by LXD and added from the VM
+to the Container deployed.</p>
+<p>
+  <img src="../../images/lxdc-vmware-stack1.png#vmware" alt="LXD Compose Vmware Stack" /></p>
+<blockquote class="book-hint info">
+  In this scenario to supply the classic HA services it&rsquo;s needed follow
+exactly the steps that normally are follow on delivery HA service directly
+over VMs. This means deploy multiple VMs with the same services (for example two
+nodes for Nginx Server) and eventually using VIPs.
+</blockquote>
+
+<p>As visible in the image every VM is configured with two differents vNICs.</p>
+<p>A <code>management vNic/Iface</code> that is only available over the Host/VM
+and it&rsquo;s used to communicate with LXD HTTPS API (normally over the 8443 port)
+and/or for SSH access (VM packages upgrades, maintenance, etc.).
+It&rsquo;s a good idea to reach this interface only over a private VPN.</p>
+<p>A <code>service vNic/iface</code> that is used over the container to supply services
+configured in the container.</p>
+<p>To ensure a more clean setup of the host a best practices is to rename the network&rsquo;s
+interface with a name more oriented with the target infrastructure. In the example,
+it&rsquo;s used the name <code>srv0</code> defined in the LXD profile assigned to the container to
+deploy. The same could be done for the management interface with a name like <code>man0</code>.</p>
+<p>To rename the network interfaces it&rsquo;s needed create an udev rule based on the MAC
+addresses assigned from VmWare to the VM. For example, editing the file
+<code>/etc/udev/rules.d/70-persistent-net.rules</code>:</p>
+<pre><code>SUBSYSTEM==&quot;net&quot;, ACTION==&quot;add&quot;, DRIVERS==&quot;?*&quot;, ATTR{address}==&quot;XX:XX:XX:XX:XX:XX&quot;, ATTR{dev_id}==&quot;0x0&quot;, ATTR{type}==&quot;1&quot;, KERNEL==&quot;eth*&quot;, NAME=&quot;man0&quot;
+SUBSYSTEM==&quot;net&quot;, ACTION==&quot;add&quot;, DRIVERS==&quot;?*&quot;, ATTR{address}==&quot;XX:XX:XX:XX:XX:YY&quot;, ATTR{dev_id}==&quot;0x0&quot;, ATTR{type}==&quot;1&quot;, KERNEL==&quot;eth*&quot;, NAME=&quot;srv0&quot;
+</code></pre><p>and then without the needed of reboot the VM just to execute:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; <span style="color:#75715e"># Ensure that the selected interface are down</span>
+$&gt; ip link set eth0 down
+$&gt; ip link set eth1 down
+$&gt; udevadm control -R <span style="color:#f92672">&amp;&amp;</span> udevadm trigger --action<span style="color:#f92672">=</span>add -v -s net
+</code></pre></div><p>When the VMs are all configured with LXD reachable over HTTPS the <code>lxd-compose</code>
+tool will reach every nodes through the different <em>remotes</em>. The file
+<code>lxd-conf/config.yml</code> will be configured in this way:</p>
+<pre><code>default-remote: local
+remotes:
+  images:
+    addr: https://images.linuxcontainers.org
+    protocol: simplestreams
+    public: true
+  macaroni:
+    addr: https://images.macaroni.funtoo.org/lxd-images
+    protocol: simplestreams
+    public: true
+  myserver:
+    addr: https://mysimplestreams.server.local/lxd-images
+    protocol: simplestreams
+    public: true
+  local:
+    addr: unix://
+    public: false
+  local-snapd:
+    addr: unix:///var/snap/lxd/common/lxd/unix.socket
+    public: false
+  vm1:
+    addr: https://vm1.infra:8443
+    auth_type: tls
+    project: default
+    protocol: lxd
+    public: false
+  vm2:
+    addr: https://vm2.infra:8443
+    auth_type: tls
+    project: default
+    protocol: lxd
+    public: false
+aliases: {}
+
+</code></pre><p>The remote <code>vm1</code> and <code>vm2</code> are the remotes of the VMs where deploy the
+target services.</p>
+<p>As described in the schema over the LXD instances is configured a LXD profile
+that map the VM vNIC <code>srv0</code> of the VM to the container with the same name.
+The nictype is <code>physical</code> is the type implemented by LXD to support this feature.</p>
+<p><em>Using native bridge or OpenVswitch bridge attached to a VmWare vNic is
+something that requires a specific setup over VmWare because the vSwitch
+uses MAC caching and MAC filter that often doesn&rsquo;t permit to have something
+that work correctly</em>. For this reason and because not always the people that
+implement and deploy the services are the same that control the VmWare the uses
+of the <code>physical</code> interface over the container is the best solution to follow
+because it&rsquo;s transparent to VmWare. The MAC address assigned to the container is
+the same mapped over VmWare. An alternative is to use the port map between the LXD
+containers and the VM vNIC but it&rsquo;s another use case describe later.</p>
+<p>In the example, it&rsquo;s been used only one network interface to supply services
+but there aren&rsquo;t limitations on this. Could be configured multiple vNics at VmWare
+level that are assigned to the containers, for example to supply an SSH service
+through a management interface directly in the container.</p>
+<p>For this solution it&rsquo;s a good idea to prepare a VmWare VM Template that is used
+to create new VMs to attach to the service when it&rsquo;s needed to scale or just
+upgrade the OS and reduce the offline time with an upgrade over a VM not attached
+to the running services.</p>
+<h2 id="dynamic-nodes-with-the-lxd-compose-render-engine">
+  Dynamic nodes with the LXD Compose render engine
+  <a class="anchor" href="#dynamic-nodes-with-the-lxd-compose-render-engine">#</a>
+</h2>
+<p>Before describe how could be possible using the <em>render engine</em> to define the
+<code>lxd-compose</code> specifications to manage the service setup I want remember to the
+reader that a specific connection with an LXD instance could be defined only
+at <em>group</em> level. It&rsquo;s possible that multiple groups could be connected to the
+same LXD instance but it&rsquo;s not true that the same group could be used to control
+multiple LXD instance at the same time (excludes the use case with LXD Cluster not
+covered by this scenario).
+Based on this concept a defined group is mapped to a specific VM and on using this scenario
+a solution that works pretty well it&rsquo;s the use of the render engine to specify the
+list of the remotes (or LXD instance) to reach for a specific service following the
+pattern described hereinafter.</p>
+<p>The render file will supply the list of the remotes assigned for a specific service,
+for example the NGinx servers that exposes the HTTP resources. The render file is
+defined directly over the <code>.lxd-compose.yml</code> or <code>--render-values|--render-default</code>
+options.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat .lxd-compose.yml
+general:
+  lxd_confdir: ./lxd-conf
+
+render_default_file: ./render/default.yaml
+render_values_file:  ./render/prod.yaml
+
+env_dirs:
+- ./envs/
+</code></pre></div><p>in this case are defined both <em>default</em> render and the <em>values</em> render.</p>
+<p>The <code>prod.yaml</code> file could be configured in this way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">release</span>: <span style="color:#e6db74">&#34;22.10&#34;</span>
+<span style="color:#f92672">nginx_nodes</span>:
+  - <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;vm1&#34;</span>
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx1&#34;</span>
+  - <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;vm2&#34;</span>
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx2&#34;</span>
+</code></pre></div><p>And these could be the options defined in the <code>default.yaml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ephemeral</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#f92672">privileged_containers</span>: <span style="color:#66d9ef">false</span>
+
+</code></pre></div><p>The connections <code>vm1</code> and <code>vm2</code> are the remotes described before and defined in the <em>config.yml</em>
+file.</p>
+<p>This could be an example of the LXD Compose specs where is defined the
+setup of the Nginx server.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># Description: Setup the Nginx Production Service</span>
+
+<span style="color:#f92672">version</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+<span style="color:#f92672">include_storage_files</span>:
+- <span style="color:#ae81ff">common/storages/default.yml</span>
+
+<span style="color:#f92672">include_profiles_files</span>:
+- <span style="color:#ae81ff">common/profiles/default.yml</span>
+- <span style="color:#ae81ff">common/profiles/net-phy-srv.yml</span>
+- <span style="color:#ae81ff">common/profiles/logs-disk.yml</span>
+- <span style="color:#ae81ff">common/profiles/autostart.yml</span>
+
+<span style="color:#f92672">projects</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx-services&#34;</span>
+    <span style="color:#f92672">description</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">      </span>      <span style="color:#ae81ff">Setup Nginx services.</span>
+
+    <span style="color:#f92672">include_env_files</span>:
+      - <span style="color:#ae81ff">myenv/vars/common.yml</span>
+<span style="color:#75715e"># Include the variable file that contains</span>
+<span style="color:#75715e"># the network configurations options.</span>
+{{ <span style="color:#ae81ff">range $k, $v := .Values.nginx_nodes }}</span>
+      - <span style="color:#ae81ff">myenv/vars/{{ $v.name }}-net.yml</span>
+{{ <span style="color:#ae81ff">end }}</span>
+
+    <span style="color:#f92672">groups</span>:
+{{ <span style="color:#ae81ff">$groups := .Values.nginx_nodes }}</span>
+{{ <span style="color:#ae81ff">$ephemeral := .Values.ephemeral }}</span>
+{{ <span style="color:#ae81ff">range $k, $v := .Values.nginx_nodes }}</span>
+
+      - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;{{ $v.name }}-group&#34;</span>
+        <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Setup Nginx Frontend Node {{ $v.name }}&#34;</span>
+        <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;{{ $v.connection }}&#34;</span>
+        <span style="color:#f92672">common_profiles</span>:
+          - <span style="color:#ae81ff">default</span>
+          - <span style="color:#ae81ff">net-phy-srv</span>
+          - <span style="color:#ae81ff">logs-disk</span>
+        {{- <span style="color:#ae81ff">if $privileged_containers }}</span>
+          - <span style="color:#ae81ff">privileged</span>
+        {{ <span style="color:#ae81ff">end }}</span>
+          - <span style="color:#ae81ff">autostart</span>
+
+        <span style="color:#f92672">ephemeral</span>: {{ <span style="color:#ae81ff">$ephemeral }}</span>
+
+        <span style="color:#f92672">include_hooks_files</span>:
+          - <span style="color:#ae81ff">common/hooks/systemd-net-static.yml</span>
+          - <span style="color:#ae81ff">common/hooks/systemd-dns.yml</span>
+          - <span style="color:#ae81ff">common/hooks/hosts.yml</span>
+
+        <span style="color:#f92672">nodes</span>:
+          - <span style="color:#f92672">name</span>: {{ <span style="color:#ae81ff">$v.name }}</span>
+            <span style="color:#f92672">image_source</span>: <span style="color:#e6db74">&#34;nginx/{{ $.Values.release }}&#34;</span>
+            <span style="color:#f92672">image_remote_server</span>: <span style="color:#e6db74">&#34;myserver&#34;</span>
+
+            <span style="color:#f92672">hooks</span>:
+              - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-sync</span>
+                <span style="color:#f92672">flags</span>:
+                  - <span style="color:#ae81ff">config</span>
+                <span style="color:#f92672">commands</span>:
+                  - &gt;-<span style="color:#e6db74">
+</span><span style="color:#e6db74">                    systemctl daemon-reload &amp;&amp;
+</span><span style="color:#e6db74">                    systemctl enable nginx &amp;&amp;
+</span><span style="color:#e6db74">                    systemctl restart nginx</span>                    
+
+            <span style="color:#75715e"># Generate the nginx configuration file based on template</span>
+            <span style="color:#75715e"># and project variables.</span>
+            <span style="color:#f92672">config_templates</span>:
+              - <span style="color:#f92672">source</span>: <span style="color:#ae81ff">nginx/templates/nginx.tmpl</span>
+                <span style="color:#f92672">dst</span>: <span style="color:#ae81ff">/tmp/lxd-compose/myinfra/{{ $v.name }}/nginx.conf</span>
+
+            <span style="color:#f92672">sync_resources</span>:
+              - <span style="color:#f92672">source</span>: <span style="color:#ae81ff">/tmp/lxd-compose/myinfra/{{ $v.name }}/nginx.conf</span>
+                <span style="color:#f92672">dst</span>: <span style="color:#ae81ff">/etc/nginx/</span>
+{{ <span style="color:#ae81ff">end }}</span>
+
+</code></pre></div><p>Some helpful commands to analyze the specs are these:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose project list
+|     PROJECT NAME  |                               DESCRIPTION                               | <span style="color:#75715e"># GROUPS |</span>
+|-------------------|-------------------------------------------------------------------------|----------|
+| nginx-services    | Setup Nginx Services                                                    |        <span style="color:#ae81ff">2</span> |
+
+$&gt; lxd-compose group list nginx-services
+|   GROUP NAME   |             DESCRIPTION              | <span style="color:#75715e"># NODES |</span>
+|----------------|--------------------------------------|---------|
+| nginx1-group   | Setup Nginx Frontend Node nginx1     |       <span style="color:#ae81ff">1</span> |
+| nginx2-group   | Setup Nginx Frontend Node nginx2     |       <span style="color:#ae81ff">1</span> |
+
+</code></pre></div><h3 id="deploy-the-service">
+  Deploy the service
+  <a class="anchor" href="#deploy-the-service">#</a>
+</h3>
+<p>The first time the all containers are down it&rsquo;s possible just deploy all nodes with the <code>apply</code> command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose apply nginx-services
+
+</code></pre></div><p>When you want upgrade a production service it&rsquo;s a good practice replace one node a time in this way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; <span style="color:#75715e"># Destroy the node nginx1.</span>
+$&gt; lxd-compose destroy nginx-services --enable-group nginx1-group
+
+$&gt; <span style="color:#75715e"># Deploy the new container related to the new release 22.10.01.</span>
+$&gt; <span style="color:#75715e"># The variable release could be passed in input or updated directly on default.yaml</span>
+$&gt; lxd-compose apply nginx-services --enable-group nginx1-group --render-env <span style="color:#e6db74">&#34;release=22.10.01&#34;</span>
+</code></pre></div><p>The same could be done in for the second node when the first is up and running.</p>
+<p>If you have a slow bandwitdh between the LXD images server could be helpful download the images
+over the VMs before execute the upgrade with the <code>fetch</code> command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose fetch nginx-services
+</code></pre></div><p>This command will download the LXD images over the configured LXD instances of the selected
+project without destroy and/or create containers.</p>
+<p>If it&rsquo;s needed add a new node/VM you need just editing the file <code>prod.yaml</code> and the <code>config.yml</code>
+to add the new node.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cat lxd-conf/config.yml
+  ...
+  vm3:
+    addr: https://vm3.infra:8443
+    auth_type: tls
+    project: default
+    protocol: lxd
+    public: false
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cat render/prod.yml
+release: <span style="color:#e6db74">&#34;22.10&#34;</span>
+nginx_nodes:
+  - connection: <span style="color:#e6db74">&#34;vm1&#34;</span>
+    name: <span style="color:#e6db74">&#34;nginx1&#34;</span>
+  - connection: <span style="color:#e6db74">&#34;vm2&#34;</span>
+    name: <span style="color:#e6db74">&#34;nginx2&#34;</span>
+  - connection: <span style="color:#e6db74">&#34;vm3&#34;</span>
+    name: <span style="color:#e6db74">&#34;nginx3&#34;</span>
+</code></pre></div><p>Again, if it&rsquo;s needed update the configuration files of all Nginx servers this could be
+executed sequentially from <code>lxd-compose</code> with the same <code>apply</code> command.</p>
+<p>In the reported example for every container is assigned a static IP address that is
+defined in one <em>vars</em> file following this pattern that display the file <code>nginx1-net.yml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">envs</span>:
+  <span style="color:#f92672">nginx1_resolved</span>:
+    - <span style="color:#f92672">file</span>: <span style="color:#ae81ff">dns.conf</span>
+      <span style="color:#f92672">content</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        [Resolve]
+</span><span style="color:#e6db74">        DNS=1.1.1.1
+</span><span style="color:#e6db74">        FallbackDNS=8.8.8.8
+</span><span style="color:#e6db74">        Domains=
+</span><span style="color:#e6db74">        MulticastDNS=no
+</span><span style="color:#e6db74">        LLMNR=no</span>        
+
+  <span style="color:#f92672">nginx1_hosts</span>:
+    <span style="color:#75715e"># - ip: &lt;ip&gt;</span>
+    <span style="color:#75715e">#   domain: &lt;domain1&gt;,&lt;domain2&gt;</span>
+    - <span style="color:#f92672">ip</span>: <span style="color:#e6db74">&#34;10.10.10.1&#34;</span>
+      <span style="color:#f92672">domain</span>: <span style="color:#ae81ff">nginx-backend01</span>
+    - <span style="color:#f92672">ip</span>: <span style="color:#e6db74">&#34;10.10.10.1&#34;</span>
+      <span style="color:#f92672">domain</span>: <span style="color:#ae81ff">nginx-backend02</span>
+
+  <span style="color:#f92672">nginx1_net</span>:
+    - <span style="color:#f92672">file</span>: <span style="color:#ae81ff">01</span>-<span style="color:#ae81ff">srv0.network</span>
+      <span style="color:#f92672">content</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        [Match]
+</span><span style="color:#e6db74">        Name=srv0
+</span><span style="color:#e6db74">        [Network]
+</span><span style="color:#e6db74">        Address=172.18.20.100/24
+</span><span style="color:#e6db74">        Gateway=172.18.20.1
+</span><span style="color:#e6db74">        LLMNR=no
+</span><span style="color:#e6db74">        # Disable binding of port ::58
+</span><span style="color:#e6db74">        IPv6AcceptRA=no</span>        
+
+
+</code></pre></div><p>The hooks used for the configuration are <code>systemd-net-static.yml</code>, <code>systemd-dns.yml</code>
+and <code>hosts.yml</code>.</p>
+<h3 id="upgrade-the-os-of-the-vm">
+  Upgrade the OS of the VM
+  <a class="anchor" href="#upgrade-the-os-of-the-vm">#</a>
+</h3>
+<p>Hereinafter a short description about what are the possibile steps to follow in Production
+to replace the VM and move an active container over a new VM where is been upgraded the OS.</p>
+<p>Obviously, it&rsquo;s possible upgrade the OS and the LXD instance without replacing the VM
+but we will try to share a way that could be used for rollback if something goes wrong.</p>
+<p>So, the first step is to clone the existing VM or just create a new VM from a template.
+If the choice is cloning, just disable service network from VmWare before boostrap of the VM.</p>
+<p>
+  <img src="../../images/lxdc-vmware-upgrade-s1.png#vmware" alt="LXD Compose Vmware VM Upgrade S1" /></p>
+<p>The new VM with a specific management interface could be upgraded meantime the service
+is up and running. Until the network interface srv0 is not assigned to the container is
+visible in the VM.</p>
+<p>When the new VM is ready the steps to follow are describe in the image hereinafter:</p>
+<p>
+  <img src="../../images/lxdc-vmware-upgrade-s2.png#vmware" alt="LXD Compose Vmware VM Upgrade S2" /></p>
+<p>In short, through the <code>lxd-compose</code> tool it&rsquo;s needed destroy the existing container.
+Eventually, you can just create a backup of the container with the normal <code>lxc</code> tool
+or copy it before run the <em>destroy</em> command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; <span style="color:#75715e"># Create the backup of the container for the rollback.</span>
+$&gt; lxc copy vm1:nginx1 vm1:nginx-bkp1
+$&gt; <span style="color:#75715e"># Or just stop the existing container.</span>
+$&gt; lxc stop vm1:nginx1
+</code></pre></div><p>If the container is stopped with <code>lxc</code> command the <em>destroy</em> command is not needed.</p>
+<p>When the container is stopped or destroyed, the service IP address 172.18.20.100
+of the example will be reused in the deploy of the new container over the new VM.
+To maintain the same name of the container it&rsquo;s only needed modify the <code>prod.yml</code>
+file to have <code>vm1-new</code> (or any other name choiced) that is the name of the
+remote of the new VM.</p>
+<p>So, in the <code>prod.yml</code> the content become:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">release</span>: <span style="color:#e6db74">&#34;22.10&#34;</span>
+<span style="color:#f92672">nginx_nodes</span>:
+  - <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;vm1-new&#34;</span>
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx1&#34;</span>
+  - <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;vm2&#34;</span>
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx2&#34;</span>
+  - <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;vm3&#34;</span>
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;nginx3&#34;</span>
+</code></pre></div><p>After this change it&rsquo;s only needed to execute the <em>apply</em> command that deploy the
+new container:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose apply --enable-group nginx1-group
+</code></pre></div><p>If something goes wrong and the user want rollback the previous container it&rsquo;s needed:
+shutdown the new VM; if the container is been stopped and not destroyed, just rerun
+the <em>apply</em> command with the <code>connection</code> reconfigured to <code>vm1</code>.</p>
+<p>If the container is been destroyed and it&rsquo;s been used a production-ready LXD image
+the user could just redeploy the new container with the previous <code>release</code>.</p>
+<h2 id="best-practices-for-production-environments">
+  Best Practices for Production environments
+  <a class="anchor" href="#best-practices-for-production-environments">#</a>
+</h2>
+<p>As all know, today all Linux distribution are <code>Rolling Release</code> for different
+reasons: the world go ahead very fast, CVE and security issues that are identified
+every day requires fast updates, etc. This means that what is deployed at time T0
+at the 99% is not installable ad the same way at time T1. So, for production
+services it&rsquo;s better to prepare LXD images that will be used on delivery without
+execute OS upgraded on container creation.</p>
+<p>The upgrades of the container OS must be apply in a testing environment where it&rsquo;s
+possible verify that there aren&rsquo;t regression with a new LXD images that when the
+QA are passed could be used to upgrade <em>production</em> environment.</p>
+<p>The 
+  <a href="https://github.com/MottainaiCI/simplestreams-builder/">Simplestreams Builder</a>
+could be used to prepare an HTTPS endpoint where expose LXD images used in the
+installation over the Simplestreams Protocol. The alternative is to use directly
+another LXD Instance as LXD images supplier.</p>
+<p>For my experience it works well to try using an <code>environment</code> specification with a
+single project to define a group of VMs that supply a specific service. This will
+simplify the upgrade process with the use of one <code>group</code> for every LXD instance
+as described in the previous chapter. Users are free to find their correct way.
+Having multiple projects defined in the same environment file it works too like
+to have a static definition of the groups without using render engine.</p>
+<p>Using the <code>physical</code> nictype doesn&rsquo;t permit to see the network interfaces from
+the VM OS, so it&rsquo;s important to supply on the created LXD images the right tools for
+throubleshooting and analyses (tcpdump, ethtool, etc.).</p>
+<p>Using a VmWare VM already supply a good isolation but to improve the security
+levels using the unprivileged containers is the best choice.</p>
+<p>In a production environment often it&rsquo;s important to maintain the logs files of
+exposed services for subsequent analyzes. This could be handled through the mount
+of the VM path inside the container that is persistent between the upgrade of one
+container with another but not if the VM is replaced. But there are different ways
+to resolve this efficiently for example through an Rsyslog remote server or over
+Vmware using a secondary disk that is detached and attached to the new VM after
+the upgrade. In the presented example the profile used for this mission is
+
+  <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/blob/master/envs/common/profiles/logs-disk.yml">logs-disk</a>.</p>
+<blockquote class="book-hint info">
+  The use of additional API to setup and create a VM through the VmWare API
+it&rsquo;s out of scope of this guide. This doesn&rsquo;t mean that is not possible.
+<code>lxd-compose</code> permits to define hooks <code>pre-project</code> related to the node <em>host</em> that means
+the local shell where lxd-compose is executed. Inside that hook it&rsquo;s possible
+execute a bash script or other that prepare the VmWare VM before execute the
+delivery of the container.
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/MottainaiCI/lxd-compose-docs/edit/master/site/content/docs/vmware-1-1.md" target="_blank" rel="noopener">
+      <img src="/lxd-compose-docs/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span></span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+
+  </div><!-- Footer Section Start -->
+<footer id="footer">
+  <div class="container">
+    <div class="row content-justify-between">
+      <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
+        <p class="copyright">Copyright:
+          <span>
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+          </span> Daniele Rondina All Rights Reserved
+        </p>
+      </div>
+      <div class="col-md-4 col-12">
+        <!-- Social Media -->
+        <ul class="social text-center text-md-right text-lg-right">
+          
+          <li><a href="https://github.com/MottainaiCI/lxd-compose"><i class="ion-social-github"></i></a></li>
+          
+          <li><a href="https://it.linkedin.com/in/danielerondina"><i class="ion-social-linkedin"></i></a></li>
+          
+          <li><a href="https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg"><i class="ion-android-chat"></i></a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer section end -->
+
+<!-- jquery -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/jQurey/jquery.min.js"></script>
+<!-- slick slider -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.min.js"></script>
+<!-- bootstrap js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- wow js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/wow-js/wow.min.js"></script>
+<!-- slider js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.js"></script>
+<!-- Fancybox -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.js"></script>
+<!-- template main js -->
+
+<script src="https://mottainaici.github.io/lxd-compose-docs/js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

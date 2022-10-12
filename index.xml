@@ -18,11 +18,21 @@ Setup LXD Environment #  Step 1: Install LXD #  Ubuntu Linux $&amp;gt; apt-get i
     
     <item>
       <title></title>
+      <link>https://mottainaici.github.io/lxd-compose-docs/docs/vmware-1-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/vmware-1-1/</guid>
+      <description>VmWare-LXD 1:1 #  In the Kata Containers technology it&amp;rsquo;s used an Hardware Virtualization to supply an additional isolation with a lightweight VM and individual kernels.
+In a similar way the use case describe here try to use a single Linux VM over VmWare where install a standalone LXD instance and then through lxd-compose deploy one or more services using a Physical vNic that is managed by LXD and added from the VM to the Container deployed.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://mottainaici.github.io/lxd-compose-docs/docs/vmware/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mottainaici.github.io/lxd-compose-docs/docs/vmware/</guid>
-      <description>LXD Compose &amp;amp; VMWare #  The mission of this section is try to describe some use cases about using LXD Compose over a VMWare stack to supply production-ready services and help the systemist and developers life.
+      <description>LXD Compose &amp;amp; VmWare #  The mission of this section is try to describe some use cases about using LXD Compose over a VMWare stack to supply production-ready services and help the systemist and developers life.
 In particular, over my work experiences I saw a lot of different requirements exposed by my Clients. Just to help the reader I will try to describe in addition of the behavior of the specific use case what are the pro &amp;amp; cons.</description>
     </item>
     
