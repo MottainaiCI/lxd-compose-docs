@@ -305,6 +305,13 @@ $> lxd-compose fetch nginx-services
 This command will download the LXD images over the configured LXD instances of the selected
 project without destroy and/or create containers.
 
+{{< hint info >}}
+In the example it's used the image LXD with alias `nginx/<release>`. This image
+is created and exposed over HTTPS in a separated step. If this is not available
+it's possible to use the images available over Macaroni Simplestreams Server or
+Canonical Server and just install packages in the `post-node-creation` phase
+to prepare the container with all needed software.
+{{< /hint >}}
 
 If it's needed add a new node/VM you need just editing the file `prod.yaml` and the `config.yml`
 to add the new node.
