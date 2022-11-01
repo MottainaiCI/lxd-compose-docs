@@ -83,7 +83,7 @@
 <link rel="manifest" href="/lxd-compose-docs/manifest.json">
 <link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/lxd-compose-docs/book.min.fced4329b6e116250f4be38d09e7215f9855a28c8e1914b3337a72505f196dc1.css" integrity="sha256-/O1DKbbhFiUPS&#43;ONCechX5hVooyOGRSzM3pyUF8ZbcE=">
-<script defer src="/lxd-compose-docs/en.search.min.9278a5072f73ff005d68c004a088c236299eb6077df3f62d3edd00ad6097914e.js" integrity="sha256-knilBy9z/wBdaMAEoIjCNimetgd98/YtPt0ArWCXkU4="></script>
+<script defer src="/lxd-compose-docs/en.search.min.04266b07e4410f6ddd7b23cdb4c7cb453ec74b37a460005d5fb71131e7b38e62.js" integrity="sha256-BCZrB&#43;RBD23deyPNtMfLRT7HSzekYABdX7cRMeezjmI="></script>
 
 <script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
 <!--
@@ -177,6 +177,8 @@ https://github.com/alex-shpak/hugo-book
   <a href="/lxd-compose-docs/docs/concepts/env/#profiles">Profiles</a></li>
 <li>
   <a href="/lxd-compose-docs/docs/concepts/env/#networks">Networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#acls">ACLs</a></li>
 <li>
   <a href="/lxd-compose-docs/docs/concepts/env/#commands">Commands</a></li>
 <li>
@@ -461,7 +463,62 @@ the API configurations directly.</p>
   <a href="https://github.com/MottainaiCI/lxd-compose-galaxy/tree/master/envs/common/networks">LXD Compose Galaxy</a>.</p>
 <p>The definition of the networks could be inline over the environment YAML or with external files
 through the <code>include_networks_files</code> attribute.</p>
-<h4 id="commands">
+<h4 id="acls">
+  ACLs
+  <a class="anchor" href="#acls">#</a>
+</h4>
+<p>It&rsquo;s possible define traffic rules that allow controlling network access
+between different instances connected to the same network or other networks.</p>
+<p>This could be done directly to the NICs of an instance or to a network.</p>
+<p><code>lxd-compose</code> permits to trace the ACLs at environment level and then
+use them through the <em>security.acls</em> option in the device section of the
+container or of the network.</p>
+<p>Additional details could be retrieved from the 
+  <a href="https://linuxcontainers.org/lxd/docs/master/howto/network_acls/">LXD documentation</a>.</p>
+<blockquote class="book-hint warning">
+  Assign a <em>security.acls</em> directly to a NIC of a container is possible only
+for OVN networks.
+</blockquote>
+
+<p>Normally, the definition and the creation of the ACLs must be done
+before the networks because, a specific ACL could be assigned to
+a network in this way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">networks</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;mottainai0&#34;</span>
+    <span style="color:#f92672">type</span>: <span style="color:#e6db74">&#34;bridge&#34;</span>
+    <span style="color:#f92672">config</span>:
+      <span style="color:#f92672">bridge.driver</span>: <span style="color:#ae81ff">native</span>
+      <span style="color:#f92672">dns.domain</span>: <span style="color:#ae81ff">mottainai.local</span>
+      <span style="color:#f92672">dns.mode</span>: <span style="color:#ae81ff">managed</span>
+      <span style="color:#f92672">ipv4.address</span>: <span style="color:#ae81ff">172.18.1.249</span><span style="color:#ae81ff">/23</span>
+      <span style="color:#f92672">ipv4.dhcp</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+      <span style="color:#f92672">ipv4.firewall</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+      <span style="color:#f92672">ipv4.nat</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+      <span style="color:#f92672">ipv6.nat</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+      <span style="color:#f92672">ipv6.dhcp</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+      <span style="color:#f92672">security.acls</span>: <span style="color:#ae81ff">acltest</span>
+</code></pre></div><p>Hereinafter, an example about how could be created an ACL with an ingress
+and egress rules:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">acls</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;acltest&#34;</span>
+    <span style="color:#f92672">ingress</span>:
+      - <span style="color:#f92672">action</span>: <span style="color:#ae81ff">allow</span>
+        <span style="color:#f92672">destination</span>: <span style="color:#ae81ff">172.18.1.1</span>,<span style="color:#ae81ff">172.18.1.2</span>
+        <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">icmp4</span>
+        <span style="color:#f92672">state</span>: <span style="color:#ae81ff">enabled</span>
+    <span style="color:#f92672">egress</span>:
+      - <span style="color:#f92672">action</span>: <span style="color:#ae81ff">allow</span>
+        <span style="color:#f92672">destination</span>: <span style="color:#ae81ff">0.0.0.0</span><span style="color:#ae81ff">/0</span>
+        <span style="color:#f92672">destination_port</span>: <span style="color:#ae81ff">443</span>
+        <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">tcp</span>
+        <span style="color:#f92672">state</span>: <span style="color:#ae81ff">enabled</span>
+</code></pre></div><p>In the example the ACL <em>acltest</em> allow ingress traffic to 172.18.1.1 and
+172.18.1.2 for ICMPv4 and allow traffic to all destination for the TCP/443
+flows.</p>
+<p>When the ACLs are defined on environment file you can create and/or update
+them with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$# lxd-compose acl create myproject -u -a
+</code></pre></div><h4 id="commands">
   Commands
   <a class="anchor" href="#commands">#</a>
 </h4>
