@@ -9,6 +9,7 @@ headless: true
   - [Environments]({{< relref "/docs/concepts/env" >}})
     - [Profiles]({{< relref "/docs/concepts/env#profiles" >}})
     - [Networks]({{< relref "/docs/concepts/env#networks" >}})
+    - [ACLs]({{< relref "/docs/concepts/env#acls" >}})
     - [Commands]({{< relref "/docs/concepts/env#commands" >}})
     - [Storages]({{< relref "/docs/concepts/env#storages" >}})
   - [Projects]({{< relref "/docs/concepts/project" >}})

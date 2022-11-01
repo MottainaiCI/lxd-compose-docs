@@ -186,6 +186,77 @@ Some examples are available on [LXD Compose Galaxy](https://github.com/Mottainai
 The definition of the networks could be inline over the environment YAML or with external files
 through the `include_networks_files` attribute.
 
+#### ACLs
+
+It's possible define traffic rules that allow controlling network access
+between different instances connected to the same network or other networks.
+
+This could be done directly to the NICs of an instance or to a network.
+
+`lxd-compose` permits to trace the ACLs at environment level and then
+use them through the *security.acls* option in the device section of the
+container or of the network.
+
+Additional details could be retrieved from the [LXD documentation](https://linuxcontainers.org/lxd/docs/master/howto/network_acls/).
+
+{{< hint warning >}}
+Assign a *security.acls* directly to a NIC of a container is possible only
+for OVN networks.
+{{< /hint >}}
+
+Normally, the definition and the creation of the ACLs must be done
+before the networks because, a specific ACL could be assigned to
+a network in this way:
+
+```yaml
+networks:
+  - name: "mottainai0"
+    type: "bridge"
+    config:
+      bridge.driver: native
+      dns.domain: mottainai.local
+      dns.mode: managed
+      ipv4.address: 172.18.1.249/23
+      ipv4.dhcp: "true"
+      ipv4.firewall: "true"
+      ipv4.nat: "true"
+      ipv6.nat: "false"
+      ipv6.dhcp: "false"
+      security.acls: acltest
+```
+
+
+Hereinafter, an example about how could be created an ACL with an ingress
+and egress rules:
+
+```yaml
+acls:
+  - name: "acltest"
+    ingress:
+      - action: allow
+        destination: 172.18.1.1,172.18.1.2
+        protocol: icmp4
+        state: enabled
+    egress:
+      - action: allow
+        destination: 0.0.0.0/0
+        destination_port: 443
+        protocol: tcp
+        state: enabled
+```
+
+In the example the ACL *acltest* allow ingress traffic to 172.18.1.1 and
+172.18.1.2 for ICMPv4 and allow traffic to all destination for the TCP/443
+flows.
+
+When the ACLs are defined on environment file you can create and/or update
+them with:
+
+```bash
+$# lxd-compose acl create myproject -u -a
+```
+
+
 #### Commands
 
 The commands have different missions:
