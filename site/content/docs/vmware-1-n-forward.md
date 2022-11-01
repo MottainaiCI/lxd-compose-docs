@@ -58,7 +58,7 @@ interface as primary ip address or as additional IP address.
 ```bash
 4: srv0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
     link/ether ee:ce:9f:0b:c8:7c brd ff:ff:ff:ff:ff:ff
-    inet 192.168.0.92/24 brd 192.168.0.255 scope global noprefixroute srv0
+    inet 192.168.10.10/24 brd 192.168.0.255 scope global noprefixroute srv0
        valid_lft forever preferred_lft forever
 ```
 
@@ -70,7 +70,7 @@ or
     link/ether ee:ce:9f:0b:c8:7c brd ff:ff:ff:ff:ff:ff
     inet 192.168.0.1/24 brd 192.168.0.255 scope global noprefixroute srv0
        valid_lft forever preferred_lft forever
-    inet 192.168.0.92/24 scope global secondary srv0
+    inet 192.168.10.10/24 scope global secondary srv0
        valid_lft forever preferred_lft forever
 ```
 
