@@ -353,3 +353,9 @@ img[src*='#vmware'] {
     margin: auto;
     width: 800px;
 }
+
+img[src*='#vmware-medium'] {
+    display: block;
+    margin: auto;
+    width: 600px;
+}

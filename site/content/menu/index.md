@@ -29,6 +29,7 @@ headless: true
 <br />
 - [**LXD Compose & VMWare**]({{< relref "/docs/vmware" >}})
   - [VmWare-LXD 1:1]({{< relref "/docs/vmware-1-1" >}})
+  - [VmWare-LXD 1:N]({{< relref "/docs/vmware-1-n-forward" >}})
 - [**LXD Compose Galaxy**]({{< relref "/docs/galaxy" >}})
 - [**Deploy Services on Raspberry Pi**]({{< relref "/docs/galaxy" >}})
 
