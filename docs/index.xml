@@ -28,6 +28,18 @@ In a similar way the use case describe here try to use a single Linux VM over Vm
     
     <item>
       <title></title>
+      <link>https://mottainaici.github.io/lxd-compose-docs/docs/vmware-1-n-forward/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/vmware-1-n-forward/</guid>
+      <description>VmWare-LXD 1:N #  A different approach is to use a single VM where configure a single LXD instance to deploy multiple containers and supply different services.
+In these use cases, the VM could expose the services:
+  with a floating IP that is exposes over the VM network interface and the internal network is hidden. On this case it&amp;rsquo;s used the Network Forward feature of LXD.
+  through the PROXY protocol to reach an internal service without expose a direct access from external network and the internal service.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://mottainaici.github.io/lxd-compose-docs/docs/vmware/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
