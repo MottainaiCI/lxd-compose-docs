@@ -15,3 +15,7 @@ the idea of the [Kata Containers](https://katacontainers.io/) where are used
 the VMWare VMs as nodes where install LXD standalone instances where `lxd-compose` 
 could be configured to delivery the services over 1 container for 1 VM.
 
+[**Vmware-LXD 1:N**]({{< relref "/docs/vmware-1-n-forward" >}}): this scenario
+it's maybe the more used where inside a VM and a single LXD instance are
+started more of one container and with different means are exposed service
+over specific ports, etc.
