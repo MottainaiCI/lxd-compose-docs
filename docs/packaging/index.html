@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+  
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Packaging Projects</title>
+  <link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+  <!-- Twitter Bootstrs CSS -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+  <!-- Ionicons Fonts Css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+  <!-- animate css -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+  <!-- Hero area slider css-->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+  <!-- hover -->
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+  <!-- template main css file -->
+  
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+  
+	<!-- Custom stylesheet - for your changes -->
+	
+  <link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen">
+  
+</head><head>
+  <meta name="generator" content="Hugo 0.81.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="LXD Compose">
+  <meta name="author" content="Geaaru">
+  <meta name="generator" content="Hugo 0.81.0" />
+
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Packaging Projects</title>
+<link rel="icon" href="https://mottainaici.github.io/lxd-compose-docs/images/favicon.ico">
+
+<!-- Twitter Bootstrs CSS -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.css">
+<!-- Ionicons Fonts Css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/ionicons/ionicons.min.css">
+<!-- animate css -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/animate-css/animate.css">
+<!-- Hero area slider css-->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.css">
+<!-- slick slider -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.css">
+<!-- Fancybox -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.css">
+<!-- hover -->
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/plugins/hover/hover-min.css">
+<!-- template main css file -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/style.min.css" media="screen">
+
+  
+<!-- Custom stylesheet - for your changes -->
+
+<link rel="stylesheet" href="https://mottainaici.github.io/lxd-compose-docs/css/custom.min.css" media="screen"><meta property="og:title" content="Packaging Projects" />
+<meta property="og:description" content="Packaging Projects #  In order to organize your projects for a Production environment it&rsquo;s possible that the team that executes the installation is not the same one that has prepared the specs. Again, the production environment is for security reasons without a direct connection with the SCM repositories where are available the templates to use for the configuration file generation. Another, example is that the templates of the configuration file of the modules implemented" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mottainaici.github.io/lxd-compose-docs/docs/packaging/" /><meta property="article:section" content="docs" />
+
+<meta property="og:site_name" content="LXD Compose" />
+
+<title>Packaging Projects | LXD Compose</title>
+<link rel="manifest" href="/lxd-compose-docs/manifest.json">
+<link rel="icon" href="/lxd-compose-docs/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/lxd-compose-docs/book.min.fced4329b6e116250f4be38d09e7215f9855a28c8e1914b3337a72505f196dc1.css" integrity="sha256-/O1DKbbhFiUPS&#43;ONCechX5hVooyOGRSzM3pyUF8ZbcE=">
+<script defer src="/lxd-compose-docs/en.search.min.1540dec91387bba42d20f24287443e429ef84e6ab1adcb99244b85b13f9f5828.js" integrity="sha256-FUDeyROHu6QtIPJCh0Q&#43;Qp74TmqxrcuZJEuFsT&#43;fWCg="></script>
+
+<script defer src="/lxd-compose-docs/sw.min.0232c72a126fed7e0676141811678c3a5a10a4fd735ed4b603233bbcb7f842a7.js" integrity="sha256-AjLHKhJv7X4GdhQYEWeMOloQpP1zXtS2AyM7vLf4Qqc="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head><section class="top-bar animated-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="https://mottainaici.github.io/lxd-compose-docs/">
+						<img src="https://mottainaici.github.io/lxd-compose-docs/images/logo.png" alt="LXD Compose">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+						aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navigation">
+						<ul class="navbar-nav ml-auto">
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/">Home</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://mottainaici.github.io/lxd-compose-docs/docs">Documentation</a>
+							</li>
+							
+							
+							
+							<li class="nav-item">
+								<a class="nav-link"
+									href="https://github.com/MottainaiCI/lxd-compose/issues">Contact</a>
+							</li>
+							
+							
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section><body dir="ltr">
+
+  <div style="margin-top: 60px;">
+
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="" aria-label="" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+  <a href="/lxd-compose-docs/docs/"><strong>The Project</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/getting-started/"><strong>Getting Started</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/"><strong>Concepts</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/">Environments</a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#profiles">Profiles</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#networks">Networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#acls">ACLs</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#commands">Commands</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/env/#storages">Storages</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/project/">Projects</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/group/">Groups</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/node/">Nodes</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/variable/">Variables</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/concepts/hook/">Hooks</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/"><strong>Template Engine</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#jinja2-engine">Jinja2 Engine</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/template_engine/#mottainai-engine">Mottainai Engine</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/render_engine/"><strong>Render Engine</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/packaging/"class=active><strong>Packaging Projects</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/"><strong>Tutorial</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#setup-lxd-environment">Step1: Install LXD</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-2-configure-lxd-client">Step2: Configure LXD Client</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-3-configure-lxd-compose-configuration-file">Step3: Configure LXD Compose configuration file</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-4-configure-lxd-profiles-and-networks">Step4: Configure LXD profiles and networks</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/tutorial/#step-5-create-your-first-project">Step5: Create your first project</a>
+<br /></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/vmware/"><strong>LXD Compose &amp; VMWare</strong></a>
+<ul>
+<li>
+  <a href="/lxd-compose-docs/docs/vmware-1-1/">VmWare-LXD 1:1</a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/vmware-1-n-forward/">VmWare-LXD 1:N</a></li>
+</ul>
+</li>
+<li>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>LXD Compose Galaxy</strong></a></li>
+<li>
+  <a href="/lxd-compose-docs/docs/galaxy/"><strong>Deploy Services on Raspberry Pi</strong></a></li>
+</ul>
+<p><br /></p>
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/MottainaiCI/lxd-compose" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg" target="_blank" rel="noopener">
+        Official Slack Channel
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/sponsors/geaaru" target="_blank" rel="noopener">
+        Support our work!
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page" >
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/lxd-compose-docs/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Packaging Projects</strong>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="packaging-projects">
+  Packaging Projects
+  <a class="anchor" href="#packaging-projects">#</a>
+</h1>
+<p>In order to organize your projects for a Production environment
+it&rsquo;s possible that the team that executes the installation is not
+the same one that has prepared the specs. Again, the production
+environment is for security reasons without a direct connection
+with the SCM repositories where are available the templates to
+use for the configuration file generation.
+Another, example is that the templates of the configuration
+file of the modules implemented</p>
+<p>Another example is that the templates of the configuration
+the file of the modules implemented is strictly related to a
+specific version and the lxd-compose specs must follow this
+relationship for use.</p>
+<p>It&rsquo;s here that the new command <code>pack</code> and <code>unpack</code> try to help
+the workflow operative that permits to have a way to share
+independent the lxd-compose specifications to a Production
+Engineer Team and follow the installation and upgrade process
+when the separation of duties doesn&rsquo;t permit to have access directly
+to source repositories.</p>
+<p>In particular, the <code>pack</code> command permits to the creation of a
+tarball of the lxd-compose specs and all the files and templates
+used for the system setup. It considers some best practices to
+follow that simplify the paths remapping of the sources used.</p>
+<p>Hereinafter, an easy example that describes a possible use case.</p>
+<h2 id="example">
+  Example
+  <a class="anchor" href="#example">#</a>
+</h2>
+<p>In the example we consider to have two different git repositories
+for the <code>lxd-compose</code> specs and the developed module where it&rsquo;s also
+available the template of his configuration file:</p>
+<p>In the example, we consider having two different git repositories
+for the <code>lxd-compose</code> specs and the developed module where it&rsquo;s also
+available the template of his configuration file.</p>
+<ul>
+<li>
+<p><code>my-lxd-compose</code>: the repository of the LXD Compose specs.</p>
+</li>
+<li>
+<p><code>my-module</code>: the repository of the developed module.</p>
+</li>
+</ul>
+<p>The two repositories are organized in this way:</p>
+<pre><code>
+$# tree
+.
+├── lxd-compose
+│   ├── envs
+│   │   ├── common
+│   │   │   ├── hooks
+│   │   │   │   ├── hosts.yml
+│   │   │   │   ├── luet-packages.yml
+│   │   │   │   ├── luet-repositories.yml
+│   │   │   │   ├── node-exporter-systemd.yml
+│   │   │   │   ├── node-exporter-sysvinit.yml
+│   │   │   │   ├── systemd-dns.yml
+│   │   │   │   ├── systemd-net-static.yml
+│   │   │   │   ├── systemd-net.yml
+│   │   │   │   ├── ubuntu-setup.yml
+│   │   │   │   └── yum-setup.yml
+│   │   │   ├── networks
+│   │   │   │   ├── mottainai0.yml
+│   │   │   │   └── ovs0.yml
+│   │   │   ├── profiles
+│   │   │   │   ├── default.yml
+│   │   │   │   ├── docker-xfs-fs.yml
+│   │   │   │   ├── docker.yml
+│   │   │   │   ├── flavor-big.yml
+│   │   │   │   ├── flavor-medium.yml
+│   │   │   │   ├── flavor-thin.yml
+│   │   │   │   ├── logs-disk.yml
+│   │   │   │   ├── loop.yml
+│   │   │   │   ├── lxd-socket-proxy.yml
+│   │   │   │   ├── lxd-socket.yml
+│   │   │   │   ├── lxd-vm.yml
+│   │   │   │   ├── net-mottainai0.yml
+│   │   │   │   ├── net-phy-mgmt.yml
+│   │   │   │   ├── net-phy-srv.yml
+│   │   │   │   ├── privileged.yml
+│   │   │   │   └── zfs.yml
+│   │   │   └── storages
+│   │   │       ├── btrfs-loopback.yml
+│   │   │       ├── btrfs-source.yml
+│   │   │       ├── ceph.yml
+│   │   │       ├── dir-source.yml
+│   │   │       ├── lvm-loopback.yml
+│   │   │       ├── lvm-source.yml
+│   │   │       ├── zfs-loopback.yml
+│   │   │       └── zfs-source.yml
+│   │   └── myproject
+│   │       ├── my.yml
+│   │       └── vars
+│   │           └── common.yaml
+│   ├── lxd-conf
+│   │   ├── client.crt
+│   │   ├── client.key
+│   │   ├── config.yml
+│   │   └── servercerts
+│   │       ├── 127.0.0.1.crt
+│   └── render
+│       └── default.yaml
+└── my-module
+    ├── conf.tmpl
+    └── mymodule.sh
+
+13 directories, 45 files
+
+</code></pre><p>This the <code>lxd-compose</code> config file <code>lxd-compose/.lxd-compose.yml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+<span style="color:#f92672">general</span>:
+    <span style="color:#f92672">lxd_confdir</span>: <span style="color:#ae81ff">./lxd-conf</span>
+<span style="color:#f92672">logging</span>:
+    <span style="color:#f92672">enable_logfile</span>: <span style="color:#66d9ef">false</span>
+    <span style="color:#f92672">level</span>: <span style="color:#ae81ff">info</span>
+    <span style="color:#f92672">enable_emoji</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">color</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">runtime_cmds_output</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">cmds_output</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">env_dirs</span>:
+    - <span style="color:#ae81ff">envs/myproject/</span>
+<span style="color:#f92672">render_default_file</span>: <span style="color:#ae81ff">render/default.yaml</span>
+
+</code></pre></div><p>Between the different best practices a good choice when the
+templates are available in different repositories is to use
+a <em>render environment</em> as a prefix path. The content of this
+variable will be used for the pack renaming later.</p>
+<p>This the content of the file <code>render/default.yaml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e">#-------------------------------------------#</span>
+<span style="color:#75715e"># General params</span>
+<span style="color:#75715e">#-------------------------------------------#</span>
+<span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;local&#34;</span>
+<span style="color:#f92672">ephemeral</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">default_ubuntu_image</span>: <span style="color:#e6db74">&#34;ubuntu/22.04&#34;</span>
+<span style="color:#f92672">default_ubuntu_lts_image</span>: <span style="color:#e6db74">&#34;ubuntu/18.04&#34;</span>
+<span style="color:#f92672">default_internal_domain</span>: <span style="color:#e6db74">&#34;mottainai.local&#34;</span>
+
+<span style="color:#f92672">source_base_dir</span>: <span style="color:#e6db74">&#34;../../..&#34;</span>
+</code></pre></div><p>The <strong>source_base_dir</strong> is the render env used in the project
+for the compilation of the module file.</p>
+<p>Obviously, it&rsquo;s better to use the same tree level for all
+projects and environments to improve readability.</p>
+<p>So, if we have a very simple module/bashing script
+that just has a source file like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cat my-module/conf.tmpl
+<span style="color:#75715e">#!/bin/bash</span>
+
+export msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .message }}&#34;</span>
+</code></pre></div><p>That is imported in the main script file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat my-module/mymodule.sh
+<span style="color:#75715e">#!/bin/bash</span>
+
+<span style="color:#75715e"># The conf.sh file is generated by lxd-compose from conf.tmpl.</span>
+source /etc/conf.sh
+
+<span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span>i<span style="color:#f92672">=</span>0; i&lt;5;i++<span style="color:#f92672">))</span>; <span style="color:#66d9ef">do</span>
+  echo $msg
+<span style="color:#66d9ef">done</span>
+</code></pre></div><p>The <strong>message</strong> variable is defined in the var file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; cat lxd-compose/envs/myproject/vars/common.yaml 
+envs:
+  message: <span style="color:#e6db74">&#34;W LXD Compose&#34;</span>
+</code></pre></div><p>In particular, the file <em>conf.tmpl</em> is the file compiled by
+<code>lxd-compose</code> to generate the <em>conf.sh</em> file imported by the
+script <em>mymodule.sh</em>. The both files are then synced in the
+container like described in this environment specs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">$ cat lxd-compose/envs/myproject/my.yml</span>
+<span style="color:#75715e"># Author: Daniele Rondina, geaaru@funtoo.org</span>
+
+<span style="color:#f92672">version</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+
+<span style="color:#f92672">template_engine</span>:
+  <span style="color:#f92672">engine</span>: <span style="color:#e6db74">&#34;mottainai&#34;</span>
+
+<span style="color:#f92672">include_profiles_files</span>:
+- <span style="color:#ae81ff">../common/profiles/net-mottainai0.yml</span>
+- <span style="color:#ae81ff">../common/profiles/default.yml</span>
+- <span style="color:#ae81ff">../common/profiles/flavor-medium.yml</span>
+- <span style="color:#ae81ff">../common/profiles/loop.yml</span>
+- <span style="color:#ae81ff">../common/profiles/docker.yml</span>
+- <span style="color:#ae81ff">../common/profiles/privileged.yml</span>
+
+<span style="color:#f92672">include_networks_files</span>:
+- <span style="color:#ae81ff">../common/networks/mottainai0.yml</span>
+- <span style="color:#ae81ff">../common/networks/ovs0.yml</span>
+
+<span style="color:#f92672">include_storage_files</span>:
+- <span style="color:#ae81ff">../common/storages/dir-source.yml</span>
+- <span style="color:#ae81ff">../common/storages/btrfs-source.yml</span>
+
+<span style="color:#f92672">pack_extra</span>:
+  <span style="color:#f92672">files</span>:
+    - {{ <span style="color:#ae81ff">.Values.source_base_dir }}/my-module/mymodule.sh</span>
+  <span style="color:#f92672">rename</span>:
+    <span style="color:#75715e"># The packth is related to the lxd-compose directory and the</span>
+    <span style="color:#75715e"># environment file basedir.</span>
+    - <span style="color:#f92672">source</span>: <span style="color:#ae81ff">../my-module/mymodule.sh</span>
+      <span style="color:#f92672">dest</span>: <span style="color:#ae81ff">sources/my-module/mymodule.sh</span>
+
+<span style="color:#f92672">projects</span>:
+
+  - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;myproject&#34;</span>
+    <span style="color:#f92672">description</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">      </span>      <span style="color:#ae81ff">Testing project for pack command.</span>
+
+    <span style="color:#f92672">include_env_files</span>:
+      - <span style="color:#ae81ff">vars/common.yaml</span>
+
+    <span style="color:#f92672">vars</span>:
+      - <span style="color:#f92672">envs</span>:
+          <span style="color:#f92672">LUET_NOLOCK</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+          <span style="color:#f92672">LUET_YES</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+
+          <span style="color:#f92672">luet_packages</span>:
+            - <span style="color:#ae81ff">net-tools</span>
+            - <span style="color:#ae81ff">bash</span>
+
+    <span style="color:#f92672">groups</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;my-module-service&#34;</span>
+        <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Start container for running my-module.&#34;</span>
+        <span style="color:#f92672">include_hooks_files</span>:
+          - <span style="color:#ae81ff">../common/hooks/luet-packages.yml</span>
+
+        <span style="color:#f92672">common_profiles</span>:
+          - <span style="color:#ae81ff">default</span>
+          - <span style="color:#ae81ff">net-mottainai0</span>
+
+        <span style="color:#75715e"># Create the environment container as ephemeral or not.</span>
+        <span style="color:#f92672">ephemeral</span>: <span style="color:#66d9ef">true</span>
+        <span style="color:#f92672">connection</span>: <span style="color:#e6db74">&#34;{{ .Values.connection }}&#34;</span>
+
+        <span style="color:#f92672">nodes</span>:
+          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mymodule1</span>
+            <span style="color:#f92672">image_source</span>: <span style="color:#e6db74">&#34;macaroni/terragon-dumplings&#34;</span>
+            <span style="color:#f92672">image_remote_server</span>: <span style="color:#e6db74">&#34;macaroni&#34;</span>
+
+            <span style="color:#f92672">hooks</span>:
+              - <span style="color:#f92672">event</span>: <span style="color:#ae81ff">post-node-sync</span>
+                <span style="color:#f92672">commands</span>:
+                  <span style="color:#75715e"># Running mymodule</span>
+                  - <span style="color:#ae81ff">bash /mymodule.sh</span>
+
+            <span style="color:#f92672">config_templates</span>:
+              - <span style="color:#f92672">source</span>: {{ <span style="color:#ae81ff">.Values.source_base_dir }}/my-module/conf.tmpl</span>
+                <span style="color:#f92672">dst</span>: <span style="color:#ae81ff">/tmp/lxd-compose/mymodule1/etc/conf.sh</span>
+
+            <span style="color:#f92672">sync_resources</span>:
+              - <span style="color:#f92672">source</span>: {{ <span style="color:#ae81ff">.Values.source_base_dir }}/my-module/mymodule.sh</span>
+                <span style="color:#f92672">dst</span>: <span style="color:#ae81ff">/</span>
+              - <span style="color:#f92672">source</span>: <span style="color:#ae81ff">/tmp/lxd-compose/mymodule1/etc/conf.sh</span>
+                <span style="color:#f92672">dst</span>: <span style="color:#ae81ff">/etc/</span>
+
+</code></pre></div><p>As visible in the specs the <em>source_base_dir</em> render variable is used
+as a prefix path in the <code>config_templates</code> and <code>sync_resources</code> sections.</p>
+<blockquote class="book-hint warning">
+  The <code>pack</code> command just includes automatically all files defined in the
+<em>config_templates</em>, profiles, groups files, variable files, networks,
+and commands but NOT the additional files added in the <em>sync_resources</em>
+section.
+This is because often it contains files generated from templates.
+If there is a sync of an extra file this file must be defined in the
+<code>pack_extra</code> section to be included in the tarball.
+This means that when there is a static file to inject in the tarball
+this path must be renamed to <code>sources</code> directory created automatically.
+If this files are stored under the lxd-compose project the rename is
+not neeeded.
+</blockquote>
+
+<p>When the project is ready for Production we can generate the tarball
+with this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose pack --source-common-path <span style="color:#e6db74">&#34;../../..&#34;</span> --to /tmp/lxd-compose-myproject.tar.gz myproject
+🏭 Processing project myproject with env file envs/myproject/my.yml.
+Template ../my-module/conf.tmpl -&gt; sources/my-module/conf.tmpl
+Tarball /tmp/lxd-compose-myproject.tar.gz generated.
+The source dir to use is: ../../sources
+</code></pre></div><p>The option <code>--source-common-path</code> normally is set with the same
+value defined in the render env for the variable <em>source_base_dir</em>.</p>
+<p>The tarball <code>/tmp/lxd-compose-project.tar.gz</code> is ready for the installation!</p>
+<p>So, in a fresh filesystem it&rsquo;s possible <em>unpack</em> the tarball with this
+command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; lxd-compose unpack --render-file render/default.yaml --render-env <span style="color:#e6db74">&#34;source_base_dir=../../sources&#34;</span> /tmp/lxd-compose-myproject.tar.gz
+Render file render/default.yaml updated correctly.
+Operation completed.
+
+</code></pre></div><p>That for the example generates this tree:</p>
+<pre><code>&lt;lxd-compose-demo&gt;#  tree
+.
+├── envs
+│   ├── common
+│   │   ├── hooks
+│   │   │   └── luet-packages.yml
+│   │   ├── networks
+│   │   │   ├── mottainai0.yml
+│   │   │   └── ovs0.yml
+│   │   ├── profiles
+│   │   │   ├── default.yml
+│   │   │   ├── docker.yml
+│   │   │   ├── flavor-medium.yml
+│   │   │   ├── loop.yml
+│   │   │   ├── net-mottainai0.yml
+│   │   │   └── privileged.yml
+│   │   └── storages
+│   │       ├── btrfs-source.yml
+│   │       └── dir-source.yml
+│   └── myproject
+│       ├── my.yml
+│       └── vars
+│           └── common.yaml
+├── lxd-conf
+│   ├── client.crt
+│   ├── client.key
+│   ├── config.yml
+│   └── servercerts
+│       └── 127.0.0.1.crt
+├── render
+│   └── default.yaml
+└── sources
+    └── my-module
+        ├── conf.tmpl
+        └── mymodule.sh
+
+13 directories, 20 files
+
+</code></pre><p>As is visible, in the tarball files are automatically injected all files
+used by the selected project like for example the hook file
+<em>envs/common/luet-packages.yml</em> but not the file <em>envs/common/luet-repositories.yml</em>.</p>
+<p>At the same time, the <em>pack</em> command injects the <code>lxd-conf</code> directory if it&rsquo;s been
+defined in the lxd-compose config file.</p>
+<p>After, the <em>unpack</em> the tree is ready for the deploy:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+$&gt; lxd-compose a myproject --env sleep<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+Apply project myproject
+Searching image: macaroni/terragon-dumplings
+For image macaroni/terragon-dumplings found fingerprint 109aec564696c4757cf0036eca5311c6f447dbf9c2ef4afc2e8db43f7c8fe98b
+&gt;&gt;&gt; Creating container mymodule1... - 🏭 
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - <span style="color:#f92672">[</span>started<span style="color:#f92672">]</span> 💣 
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>sleep<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> sleep <span style="color:#e6db74">${</span>sleep<span style="color:#e6db74">}</span> ; <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e /etc/os-release <span style="color:#f92672">]</span> ; <span style="color:#66d9ef">then</span> ubuntu<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat /etc/os-release | grep ID| grep ubuntu | wc -l<span style="color:#66d9ef">)</span> ; <span style="color:#66d9ef">else</span> ubuntu<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> ; <span style="color:#66d9ef">fi</span> <span style="color:#f92672">&amp;&amp;</span> luet repo update <span style="color:#f92672">&amp;&amp;</span> luet i -y utils/jq utils/yq <span style="color:#f92672">&amp;&amp;</span> luet i -y <span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>luet_packages<span style="color:#e6db74">}</span> | jq <span style="color:#e6db74">&#39;.[]&#39;</span> -r<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> luet cleanup --purge-repos ; - ☕ 
+🏠 Repository:              geaaru-repo-index Revision:   <span style="color:#ae81ff">3</span> - 2023-02-07 14:36:23 +0000 UTC
+🏠 Repository:               mottainai-stable Revision:  <span style="color:#ae81ff">67</span> - 2023-02-20 18:13:58 +0000 UTC
+🏠 Repository:               macaroni-commons Revision: <span style="color:#ae81ff">117</span> - 2023-01-08 09:28:23 +0000 UTC
+🏠 Repository:              macaroni-terragon Revision: <span style="color:#ae81ff">143</span> - 2023-02-07 09:11:27 +0000 UTC
+
+...
+
+Resolve finalizers...
+🚀 Luet 0.33.0-geaaru-g4e8db62fb8d2b25df7652f5001353fcde8893197 2023-02-19 07:42:11 UTC - go1.20.1
+🏠 Repository:              geaaru-repo-index Revision:   <span style="color:#ae81ff">3</span> - 2023-02-07 14:36:23 +0000 UTC
+🏠 Repository:               macaroni-commons Revision: <span style="color:#ae81ff">117</span> - 2023-01-08 09:28:23 +0000 UTC
+🏠 Repository:              macaroni-terragon Revision: <span style="color:#ae81ff">143</span> - 2023-02-07 09:11:27 +0000 UTC
+🏠 Repository:               mottainai-stable Revision:  <span style="color:#ae81ff">67</span> - 2023-02-20 18:13:58 +0000 UTC
+🚧  warning sys-apps/net-tools already installed.
+🚧  warning app-shells/bash already installed.
+🚧  warning No packages to install.
+Cleaned:  <span style="color:#ae81ff">17</span> packages.
+Repos Cleaned:  <span style="color:#ae81ff">4</span>
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> Compile <span style="color:#ae81ff">1</span> resources... 🍦
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - <span style="color:#f92672">[</span> 1/ 1<span style="color:#f92672">]</span> /tmp/lxd-compose/mymodule1/etc/conf.sh ✔
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> Syncing <span style="color:#ae81ff">2</span> resources... - 🚌
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - <span style="color:#f92672">[</span> 1/ 2<span style="color:#f92672">]</span> / - ✔
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - <span style="color:#f92672">[</span> 2/ 2<span style="color:#f92672">]</span> /etc/ - ✔
+&gt;&gt;&gt; <span style="color:#f92672">[</span>mymodule1<span style="color:#f92672">]</span> - bash /mymodule.sh - ☕
+W LXD Compose
+W LXD Compose
+W LXD Compose
+W LXD Compose
+W LXD Compose
+All <span style="color:#66d9ef">done</span>.
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/MottainaiCI/lxd-compose-docs/edit/master/site/content/docs/packaging.md" target="_blank" rel="noopener">
+      <img src="/lxd-compose-docs/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span></span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+
+  </div><!-- Footer Section Start -->
+<footer id="footer">
+  <div class="container">
+    <div class="row content-justify-between">
+      <div class="col-md-8 col-12 text-center text-lg-left text-md-left">
+        <p class="copyright">Copyright:
+          <span>
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+          </span> Daniele Rondina All Rights Reserved
+        </p>
+      </div>
+      <div class="col-md-4 col-12">
+        <!-- Social Media -->
+        <ul class="social text-center text-md-right text-lg-right">
+          
+          <li><a href="https://github.com/MottainaiCI/lxd-compose"><i class="ion-social-github"></i></a></li>
+          
+          <li><a href="https://it.linkedin.com/in/danielerondina"><i class="ion-social-linkedin"></i></a></li>
+          
+          <li><a href="https://join.slack.com/t/mottainaici/shared_invite/zt-zdmrc651-IvxE9j~TT5ssv_CVo51uZg"><i class="ion-android-chat"></i></a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer section end -->
+
+<!-- jquery -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/jQurey/jquery.min.js"></script>
+<!-- slick slider -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slick/slick.min.js"></script>
+<!-- bootstrap js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- wow js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/wow-js/wow.min.js"></script>
+<!-- slider js -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/slider/slider.js"></script>
+<!-- Fancybox -->
+<script src="https://mottainaici.github.io/lxd-compose-docs/plugins/facncybox/jquery.fancybox.js"></script>
+<!-- template main js -->
+
+<script src="https://mottainaici.github.io/lxd-compose-docs/js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

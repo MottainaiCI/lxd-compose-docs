@@ -112,6 +112,15 @@ The name of the node must be unique inside all loaded environments. In the real 
     </item>
     
     <item>
+      <title>Packaging Projects</title>
+      <link>https://mottainaici.github.io/lxd-compose-docs/docs/packaging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mottainaici.github.io/lxd-compose-docs/docs/packaging/</guid>
+      <description>Packaging Projects #  In order to organize your projects for a Production environment it&amp;rsquo;s possible that the team that executes the installation is not the same one that has prepared the specs. Again, the production environment is for security reasons without a direct connection with the SCM repositories where are available the templates to use for the configuration file generation. Another, example is that the templates of the configuration file of the modules implemented</description>
+    </item>
+    
+    <item>
       <title>Projects</title>
       <link>https://mottainaici.github.io/lxd-compose-docs/docs/concepts/project/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
