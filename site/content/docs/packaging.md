@@ -12,8 +12,6 @@ the same one that has prepared the specs. Again, the production
 environment is for security reasons without a direct connection
 with the SCM repositories where are available the templates to
 use for the configuration file generation.
-Another, example is that the templates of the configuration
-file of the modules implemented
 
 Another example is that the templates of the configuration
 the file of the modules implemented is strictly related to a
