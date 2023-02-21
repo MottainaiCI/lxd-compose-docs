@@ -20,6 +20,21 @@ Before to describe how the variables are used inside the hooks i will describe
 the different way to set a specific variable inside *lxd-compose*.
 
 
+### Filter
+
+As described in the [issue #16](https://github.com/MottainaiCI/lxd-compose/issues/16)
+using variables too big or complex could generates some issues in LXD.
+
+So, it's possible define at project level the list of the variables to exclude
+from automatic injection in the execute shell of the commands.
+
+```yaml
+shell_envs_filter:
+  - filteredEnv
+```
+
+The filtered variables will be available only for the template engine.
+
 
 ### Inline variable
 
