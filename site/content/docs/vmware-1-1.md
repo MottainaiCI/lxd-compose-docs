@@ -64,7 +64,7 @@ remotes:
     protocol: simplestreams
     public: true
   macaroni:
-    addr: https://images.macaroni.funtoo.org/lxd-images
+    addr: https://macaronios.mirror.garr.it/images/lxd-images
     protocol: simplestreams
     public: true
   myserver:

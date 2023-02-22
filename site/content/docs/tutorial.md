@@ -95,7 +95,7 @@ some configurations directly with a YAML source.
 
 #### Step 1b: Setup LXD instance through lxd-compose
 
-On both [Macaroni OS](httsp://www.macaroni.funtoo.org) and [Funtoo](https://www.funtoo.org/) it is possible to use `lxd-compose` to setup LXD instance directly with the
+On both [Macaroni OS](httsp://www.macaronios.org) and [Funtoo](https://www.funtoo.org/) it is possible to use `lxd-compose` to setup LXD instance directly with the
 project `lxd-setup-and-test` from
 [LXD Compose Galaxy Project](https://github.com/MottainaiCI/lxd-compose-galaxy/).
 
