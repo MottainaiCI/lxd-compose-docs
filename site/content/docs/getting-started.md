@@ -11,7 +11,7 @@ type: docs
 
 ## Get LXD Compose
 
-`lxd-compose` is available as [Funtoo Macaroni OS](https://www.macaronios.org/) package and installable in every Linux
+`lxd-compose` is available as [Macaroni OS](https://www.macaronios.org/) package and installable in every Linux
 distro through [luet](https://github.com/geaaru/luet) tool with these steps:
 
 #### Installation
