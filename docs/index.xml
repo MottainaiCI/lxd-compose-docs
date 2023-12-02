@@ -64,7 +64,7 @@ In particular, over my work experiences I saw a lot of different requirements ex
       
       <guid>https://mottainaici.github.io/lxd-compose-docs/docs/getting-started/</guid>
       <description>Getting Started #  Prerequisites #  lxd-compose doesn&amp;rsquo;t require libraries or tools, just an LXD instance to call.
-Get LXD Compose #  lxd-compose is available as Funtoo Macaroni OS package and installable in every Linux distro through luet tool with these steps:
+Get LXD Compose #  lxd-compose is available as Macaroni OS package and installable in every Linux distro through luet tool with these steps:
 Installation #  $&amp;gt; curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh # Install luet on your system $&amp;gt; sudo luet install -y app-emulation/lxd-compose # Install lxd-compose binary $&amp;gt; sudo luet cleanup Upgrade #  $&amp;gt; sudo luet upgrade Create environment tree #  There isn&amp;rsquo;t a specific directory tree required to create an lxd-compose project but hereinafter is explained the best practices to start.</description>
     </item>
     
